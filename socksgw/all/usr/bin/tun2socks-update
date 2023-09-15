@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# tun2socks update script
+# Dependencies: fping wget p7zip zenity
+
+#Если сайт доступен - продолжить
+[[ $(fping github.com) ]] || exit;
+
+export DISPLAY=:0
+
+#Language select
+case $LANG in
+     ru_RU.UTF-8)
+          str=('Обновление tun2socks' 'Обновить tun2socks до последней версии?' \
+          '1. Обновление займёт примерно 10-15 секунд' \
+          '2. Программа будет открыта после обновления')
+          ;;
+     *)
+          str=('tun2socks update' 'Update tun2socks to the latest version?' \
+          '1. The update will take about 10-15 seconds' \
+          '2. The program will be opened after the update')
+          ;;
+esac
+
+#Версия локального xray-core (цифры = число)
+test -f /bin/tun2socks-linux-amd64 && lversion=$(/bin/tun2socks-linux-amd64 --version | head -n1 | cut -f2 -d"-") || lversion="0"
+
+#Имя новейшего архива Xray-linux-64.zip на GitHub
+cd /etc/socksgw; wget -N https://api.github.com/repos/xjasonlyu/tun2socks/releases/latest
+archurl=$(cat ./latest | tr -d '"' | tr ' ' '\n' | grep 'tun2socks-linux-amd64.zip' | grep -v ".dgst")
+#echo $archurl
+
+#Версия tun2socks на сайте (цифры = число)
+rversion=$(echo $archurl | cut -d "/" -f8 | sed 's/[[:alpha:]]*//g')
+#echo $rversion
+
+#Сравнение версий и обновление
+if [[ -n $rversion && $lversion != $rversion ]]; then
+zenity --question --title="${str[0]}" --text="${str[1]}\n\n${str[2]}\n${str[3]}" --no-wrap
+    if [[ $? -eq 0 ]]; then
+	killall socksgw; systemctl stop tun2socks;
+	cd /etc/socksgw
+	wget $archurl
+	7z e -y ./*.zip
+	mv -f tun2socks-linux-amd64 /bin/
+	rm -f ./*.zip
+
+	sleep 2; if [[ -z $(pidof socksgw) ]]; then systemctl restart tun2socks; socksgw; fi;
+    fi;
+fi;
+
+exit 0

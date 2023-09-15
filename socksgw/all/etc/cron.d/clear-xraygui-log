@@ -1,0 +1,7 @@
+#Очистка лога каждый час: /home/$user/.config/xraygui/xraygui.log
+
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+user=$(ps aux | grep xraygui | grep -v root | cut -f1 -d" " | head -n1)
+0 * * * * root bash -c "echo '--log trimming--'>/home/$user/.config/xraygui/xraygui.log; chown $user:$user /home/$user/.config/xraygui/xraygui.log"
+

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=SocksGW (Socks5 gateway)
+Name[ru]=SocksGW (Шлюз Socks5)
+Icon=socksgw
+Exec=socksgw
+Type=Application
+Categories=System;
+Terminal=false

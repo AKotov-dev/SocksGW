@@ -1,0 +1,36 @@
+This repack.txt file was created automatically by RPMCreator v2.5
+It contains the necessary information to recreation the program from the source code
+
+Information about the program:
+---
+Name of program: SocksGW
+Version of program: 0.1
+Program development tool: Lazarus
+Version of program development tool: 2.2.4
+URL the sources + binaries of the author: 11
+
+Information about the rpm-package:
+---
+Build method: Portable RPM
+Time stamp: 14-9-23 20:38:20
+
+Name: socksgw
+Version: 0.1
+Release: 0.mrx9
+Group: Accessibility
+License: GPLv3
+Maintainer: Alex Kotov
+Vendor: alex_q_2000 (C) 2023
+URL of the copy source codes: 111
+
+Summary: Socks5 gateway configurator
+
+Description:
+---
+Socks5 gateway configurator
+---
+More information: /usr/share/doc/package_name/repack.txt
+
+Package dependencies:
+---
+fping systemd zenity curl gtk2 polkit

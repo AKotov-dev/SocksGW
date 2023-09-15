@@ -1,0 +1,187 @@
+object MainForm: TMainForm
+  Left = 293
+  Height = 402
+  Top = 128
+  Width = 645
+  Caption = 'SocksGW'
+  ClientHeight = 402
+  ClientWidth = 645
+  OnCreate = FormCreate
+  OnShow = FormShow
+  SessionProperties = 'Left;Top'
+  LCLVersion = '2.2.4.0'
+  object Label1: TLabel
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    Left = 7
+    Height = 17
+    Top = 271
+    Width = 34
+    BorderSpacing.Top = 25
+    Caption = 'WAN:'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    Left = 217
+    Height = 17
+    Top = 271
+    Width = 28
+    Anchors = [akTop]
+    Caption = 'LAN:'
+    ParentColor = False
+  end
+  object LAN_IP: TEdit
+    AnchorSideLeft.Control = Label4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 469
+    Height = 37
+    Top = 261
+    Width = 169
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 5
+    BorderSpacing.Right = 7
+    TabOrder = 1
+  end
+  object Label4: TLabel
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    Left = 417
+    Height = 17
+    Top = 271
+    Width = 47
+    Anchors = [akTop]
+    Caption = 'LAN_IP:'
+    ParentColor = False
+  end
+  object ApplyBtn: TSpeedButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 487
+    Height = 48
+    Top = 24
+    Width = 151
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 7
+    Caption = 'APPLY'
+    OnClick = ApplyBtnClick
+  end
+  object Label5: TLabel
+    Left = 7
+    Height = 238
+    Top = 8
+    Width = 378
+    Caption = 'Before setting up SocksGW, do the following:'#10'  '#10'1. Configure WAN and LAN network cards via Control Center:'#10'-WAN to the provider, LAN to the local network'#10' '#10'2. Check Internet access'#10' '#10'3. Launch DNSCrypt-GUI, specify port "2053" and run'#10'-127.0.0.1:2053'#10' '#10'4. Launch XRayGUI, load your VPS configuration and run'#10'-127.0.0.1:1080'#10' '#10'After that, enter the details below and click the "APPLY" button'
+    ParentColor = False
+  end
+  object Label6: TLabel
+    AnchorSideLeft.Control = IP_RANGE
+    AnchorSideTop.Control = WAN
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = IP_RANGE
+    Left = 7
+    Height = 17
+    Top = 318
+    Width = 403
+    BorderSpacing.Top = 20
+    BorderSpacing.Bottom = 2
+    Caption = 'DHCP (Local IP range. For example: 192.168.1.50,192.168.1.250,72h):'
+    ParentColor = False
+  end
+  object IP_RANGE: TEdit
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 7
+    Height = 37
+    Top = 337
+    Width = 631
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 5
+    BorderSpacing.Top = 2
+    BorderSpacing.Right = 7
+    TabOrder = 2
+  end
+  object IPV6: TCheckBox
+    AnchorSideLeft.Control = StopBtn
+    AnchorSideTop.Side = asrBottom
+    Left = 487
+    Height = 32
+    Top = 136
+    Width = 114
+    Caption = 'IPv6 (On/Off)'
+    TabOrder = 0
+  end
+  object StopBtn: TSpeedButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 487
+    Height = 48
+    Top = 73
+    Width = 151
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 7
+    Caption = 'STOP ENCRYPTION'
+    OnClick = StopBtnClick
+  end
+  object Shape1: TShape
+    AnchorSideLeft.Control = ApplyBtn
+    AnchorSideLeft.Side = asrCenter
+    Left = 550
+    Height = 10
+    Top = 8
+    Width = 25
+    Brush.Color = clYellow
+  end
+  object WAN: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    Left = 46
+    Height = 37
+    Top = 261
+    Width = 150
+    BorderSpacing.Left = 5
+    ItemHeight = 0
+    TabOrder = 3
+  end
+  object LAN: TComboBox
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    Left = 250
+    Height = 37
+    Top = 261
+    Width = 150
+    BorderSpacing.Left = 5
+    ItemHeight = 0
+    OnChange = LANChange
+    TabOrder = 4
+  end
+  object StaticText1: TStaticText
+    Left = 0
+    Height = 20
+    Top = 382
+    Width = 645
+    Align = alBottom
+    Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
+    Font.Color = clGray
+    Font.Height = -11
+    Font.Name = 'Sans'
+    ParentFont = False
+    TabOrder = 5
+  end
+  object IniPropStorage1: TIniPropStorage
+    StoredValues = <>
+    Left = 408
+    Top = 64
+  end
+end

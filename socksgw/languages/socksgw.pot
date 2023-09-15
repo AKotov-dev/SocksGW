@@ -1,0 +1,57 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tmainform.applybtn.caption
+msgid "APPLY"
+msgstr ""
+
+#: tmainform.caption
+msgid "SocksGW"
+msgstr ""
+
+#: tmainform.ipv6.caption
+msgid "IPv6 (On/Off)"
+msgstr ""
+
+#: tmainform.label1.caption
+msgid "WAN:"
+msgstr ""
+
+#: tmainform.label2.caption
+msgid "LAN:"
+msgstr ""
+
+#: tmainform.label4.caption
+msgid "LAN_IP:"
+msgstr ""
+
+#: tmainform.label5.caption
+msgid ""
+"Before setting up SocksGW, do the following:\n"
+"  \n"
+"1. Configure WAN and LAN network cards via Control Center:\n"
+"-WAN to the provider, LAN to the local network\n"
+" \n"
+"2. Check Internet access\n"
+" \n"
+"3. Launch DNSCrypt-GUI, specify port \"2053\" and run\n"
+"-127.0.0.1:2053\n"
+" \n"
+"4. Launch XRayGUI, load your VPS configuration and run\n"
+"-127.0.0.1:1080\n"
+" \n"
+"After that, enter the details below and click the \"APPLY\" button"
+msgstr ""
+
+#: tmainform.label6.caption
+msgid "DHCP (Local IP range. For example: 192.168.1.50,192.168.1.250,72h):"
+msgstr ""
+
+#: tmainform.statictext1.caption
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
+msgstr ""
+
+#: tmainform.stopbtn.caption
+msgid "STOP ENCRYPTION"
+msgstr ""
+
