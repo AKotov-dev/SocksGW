@@ -26,5 +26,7 @@ LAN->Остальное->IPTABLES+ROUTE->Tun2Socks+Xray->WAN
 
 Использованы материалы:
 ---
+[XRay-Core, Project X](https://github.com/XTLS/Xray-core)  
+[tun2socks - powered by gVisor TCP/IP stack. Author: xjasonlyu](https://github.com/xjasonlyu/tun2socks)  
 [Wi-Fi через прокси без шума и пыли (почти). Автор: alevor](https://habr.com/ru/articles/697916/)  
 [DNSCrypt: первый опыт использования. Автор: kanyck](https://forum.calculate-linux.org/t/dnscrypt/9375)
