@@ -5,6 +5,9 @@ SocksGW - это инструмент, позволяющий превратит
 
 Вы можете настроить шлюз самостоятельно, с нуля. Для этого установите пакеты [dnscrypt-gui](https://github.com/AKotov-dev/dnscrypt-gui/releases), [xraygui](https://github.com/AKotov-dev/XRayGUI/releases) и [socksgw](https://github.com/AKotov-dev/SocksGW/releases)...
 
+**Зависимости:** fping systemd zenity curl gtk2 polkit xraygui dnscrypt-gui dnsmasq iptables  
+**Рабочий каталог:** /etc/sockwgw; скрипт построения шлюза: /etc/socksgw/tun2socks.sh  
+  
 Перед настройкой шлюза **SocksGW** сделайте следующее:
   
 1. Настройте сетевые карты WAN и LAN средствами ОС: WAN до провайдера, LAN в локальную сеть
