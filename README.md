@@ -1,7 +1,7 @@
 # SocksGW
 SocksGW - это инструмент, позволяющий превратить обычный компьютер с двумя сетевыми картами в интернет-шлюз SOCKS5. Он является связующим звеном между [XRayGUI](https://github.com/AKotov-dev/XRayGUI) и [DNSCrypt-GUI](https://github.com/AKotov-dev/dnscrypt-gui). Таким образом шлюз состоит из 3 основных пакетов.
 
-Готовая сборка (флешка-шлюз) для установки на будущий роутер [находится здесь](https://cloud.mail.ru/public/fVv4/b3Zh1WnaG).
+Готовая сборка (флешка-шлюз) для установки на будущий роутер [находится здесь](https://cloud.mail.ru/public/fVv4/b3Zh1WnaG) (RU/EN).
 
 Вы можете настроить шлюз самостоятельно, с нуля. Для этого установите пакеты [dnscrypt-gui](https://github.com/AKotov-dev/dnscrypt-gui/releases), [xraygui](https://github.com/AKotov-dev/XRayGUI/releases) и [socksgw](https://github.com/AKotov-dev/SocksGW/releases). Обсуждение [здесь](https://linuxforum.ru/viewtopic.php?pid=471777#p471777).
 
