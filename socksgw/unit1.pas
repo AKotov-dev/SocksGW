@@ -231,6 +231,7 @@ begin
     //Отключить дисплей (экспериментальная опция, нужен тест работы с VNC!)
     if WDisplay.Checked then
     begin
+      S.Clear;
       S.Add('Section "Device"');
       S.Add('      Identifier      "Configured Video Device"');
       S.Add('      Driver          "vesa"');

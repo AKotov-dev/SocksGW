@@ -157,8 +157,8 @@ begin
     S.Add('iptables -t mangle -N tun2socks');
     S.Add('#Отправляем в неё всё, кроме DNS из $lan в прокси/tun2socks');
     S.Add('#iptables -t mangle -I PREROUTING -i $lan -j MARK --set-mark 3');
-    S.Add('iptables -t mangle -I PREROUTING -i $lan -p udp ! --dport 53 -j MARK --set-mark 3');
-    S.Add('iptables -t mangle -I PREROUTING -i $lan -p tcp ! --dport 53 -j MARK --set-mark 3');
+    S.Add('iptables -t mangle -I PREROUTING -i $lan -p udp -m multiport ! --dport 53,5900 -j MARK --set-mark 3');
+    S.Add('iptables -t mangle -I PREROUTING -i $lan -p tcp -m multiport ! --dport 53,5900 -j MARK --set-mark 3');
     S.Add('');
     S.Add('#Отправляем https трафик в прокси');
     S.Add('#iptables -t mangle -A OUTPUT -p tcp --dport 80 -j MARK --set-mark 3');
