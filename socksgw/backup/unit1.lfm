@@ -172,7 +172,6 @@ object MainForm: TMainForm
     Top = 387
     Width = 647
     Align = alBottom
-    BorderStyle = sbsSingle
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
     Font.Color = clGray
     Font.Height = -11

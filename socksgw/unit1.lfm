@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 306
+  Left = 293
   Height = 407
-  Top = 127
+  Top = 125
   Width = 647
   Caption = 'SocksGW'
   ClientHeight = 407
