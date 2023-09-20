@@ -21,6 +21,10 @@ msgstr ""
 msgid "LAN:"
 msgstr ""
 
+#: tmainform.label3.caption
+msgid "VNC password:"
+msgstr ""
+
 #: tmainform.label4.caption
 msgid "LAN_IP:"
 msgstr ""
@@ -53,5 +57,12 @@ msgstr ""
 
 #: tmainform.stopbtn.caption
 msgid "STOP ENCRYPTION"
+msgstr ""
+
+#: tmainform.vncpassedit.hint
+msgctxt "tmainform.vncpassedit.hint"
+msgid ""
+"LAN_IP:5900\n"
+"Default password: socksgw"
 msgstr ""
 

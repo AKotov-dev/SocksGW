@@ -32,6 +32,10 @@ msgstr ""
 msgid "LAN:"
 msgstr ""
 
+#: tmainform.label3.caption
+msgid "VNC password:"
+msgstr "Пароль VNC:"
+
 #: tmainform.label4.caption
 msgid "LAN_IP:"
 msgstr ""
@@ -79,3 +83,17 @@ msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https:
 #: tmainform.stopbtn.caption
 msgid "STOP ENCRYPTION"
 msgstr ""
+
+#: tmainform.vncpassedit.hint
+#, fuzzy
+#| msgid ""
+#| "LAN_IP:5900\n"
+#| "Default password: ghbdtn"
+msgctxt "tmainform.vncpassedit.hint"
+msgid ""
+"LAN_IP:5900\n"
+"Default password: socksgw"
+msgstr ""
+"LAN_IP:5900\n"
+"Пароль по умолчанию: ghbdtn"
+

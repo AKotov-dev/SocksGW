@@ -2,7 +2,7 @@
 name=socksgw
 
 [VERSION]
-version=0.1
+version=0.2
 
 [RELEASE]
 release=0.mrx9
@@ -31,7 +31,7 @@ urlcopy=https://github.com/AKotov-dev/SocksGW
 license=GPLv3
 
 [DEPS]
-deps=fping systemd zenity curl gtk2 polkit xraygui dnscrypt-gui dnsmasq iptables
+deps=fping systemd zenity curl gtk2 polkit xraygui dnscrypt-gui dnsmasq iptables x11vnc
 
 [META]
 meta=0
@@ -79,5 +79,9 @@ devtool=Lazarus
 toolversion=2.2.4
 
 [INFO]
-0=v0.1
-1=-Initial release
+0=v0.2
+1=+ Access from LAN via VNC, port 5900, default password `socksgw`
+2=+ RPM packages for MgaRemix/Mageia (9)
+3=
+4=v0.1
+5=-Initial release

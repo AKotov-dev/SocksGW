@@ -13,6 +13,8 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    VNCPassEdit: TEdit;
+    Label3: TLabel;
     LAN: TComboBox;
     StaticText1: TStaticText;
     WAN: TComboBox;
@@ -208,10 +210,27 @@ begin
 
     S.SaveToFile('/etc/dnsmasq.conf');
 
-    //Старт dnamsq/tun2socks
+    //VNC /etc/systemd/system/x11vnc.service
+    if Trim(VNCPassEdit.Text) = '' then VNCPassEdit.Text := 'socksgw';
+
+    S.Clear;
+    S.Add('[Unit]');
+    S.Add('Description=Start x11vnc at startup');
+    S.Add('After=multi-user.target');
+    S.Add('');
+    S.Add('[Service]');
+    S.Add('Type=simple');
+    S.Add('ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -passwdfile /etc/socksgw/x11vnc.pass -rfbport 5900 -shared -listen ' + LAN_IP.Text);
+    S.Add('');
+    S.Add('[Install]');
+    S.Add('WantedBy=multi-user.target');
+
+    S.SaveToFile('/etc/systemd/system/x11vnc.service');
+
+    //Старт dnamsq/tun2socks/x11vnc
     Application.ProcessMessages;
-    RunCommand('/bin/bash', ['-c',
-      'systemctl enable dnsmasq tun2socks; systemctl restart dnsmasq tun2socks'], k);
+    RunCommand('/bin/bash', ['-c', 'echo "' + VNCPassEdit.Text +
+      '"> /etc/socksgw/x11vnc.pass; systemctl enable dnsmasq tun2socks x11vnc; systemctl restart dnsmasq tun2socks x11vnc'], k);
   finally
     S.Free;
   end;
@@ -228,7 +247,7 @@ begin
   //Ширина-Высота формы
   MainForm.Width := 10 + Label5.Width + 100 + ApplyBtn.Width + 10;
   MainForm.Height := 10 + Label5.Height + 25 + WAN.Height + 15 +
-    Label6.Height + IP_RANGE.Height + 2 + StaticText1.Height;
+    Label6.Height + IP_RANGE.Height + 5 + StaticText1.Height;
 
   //Читаем параметры из конфигов
   //LAN
@@ -257,6 +276,10 @@ begin
       IPV6.Checked := True
     else
       IPV6.Checked := False;
+
+  //VNC_PASSWORD
+  if RunCommand('/bin/bash', ['-c', 'cat /etc/socksgw/x11vnc.pass'], S) then
+    VNCPassEdit.Text := Trim(S);
 
   //Запуск потока проверки состояния tun2socks
   FPortScanThread := PortScan.Create(False);

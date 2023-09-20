@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 293
-  Height = 402
-  Top = 128
-  Width = 645
+  Left = 306
+  Height = 407
+  Top = 127
+  Width = 647
   Caption = 'SocksGW'
-  ClientHeight = 402
-  ClientWidth = 645
+  ClientHeight = 407
+  ClientWidth = 647
   OnCreate = FormCreate
   OnShow = FormShow
   SessionProperties = 'Left;Top'
@@ -39,7 +39,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 469
+    Left = 471
     Height = 37
     Top = 261
     Width = 169
@@ -51,7 +51,7 @@ object MainForm: TMainForm
   object Label4: TLabel
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrCenter
-    Left = 417
+    Left = 419
     Height = 17
     Top = 271
     Width = 47
@@ -62,7 +62,7 @@ object MainForm: TMainForm
   object ApplyBtn: TSpeedButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 487
+    Left = 489
     Height = 48
     Top = 24
     Width = 151
@@ -101,7 +101,7 @@ object MainForm: TMainForm
     Left = 7
     Height = 37
     Top = 337
-    Width = 631
+    Width = 633
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 5
     BorderSpacing.Top = 2
@@ -111,7 +111,7 @@ object MainForm: TMainForm
   object IPV6: TCheckBox
     AnchorSideLeft.Control = StopBtn
     AnchorSideTop.Side = asrBottom
-    Left = 487
+    Left = 489
     Height = 32
     Top = 136
     Width = 114
@@ -121,7 +121,7 @@ object MainForm: TMainForm
   object StopBtn: TSpeedButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 487
+    Left = 489
     Height = 48
     Top = 73
     Width = 151
@@ -133,7 +133,7 @@ object MainForm: TMainForm
   object Shape1: TShape
     AnchorSideLeft.Control = ApplyBtn
     AnchorSideLeft.Side = asrCenter
-    Left = 550
+    Left = 552
     Height = 10
     Top = 8
     Width = 25
@@ -169,15 +169,47 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 382
-    Width = 645
+    Top = 387
+    Width = 647
     Align = alBottom
+    BorderStyle = sbsSingle
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
     Font.Color = clGray
     Font.Height = -11
     Font.Name = 'Sans'
     ParentFont = False
     TabOrder = 5
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = StopBtn
+    AnchorSideBottom.Control = VNCPassEdit
+    Left = 489
+    Height = 17
+    Top = 190
+    Width = 91
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Bottom = 2
+    Caption = 'VNC password:'
+    ParentColor = False
+  end
+  object VNCPassEdit: TEdit
+    AnchorSideLeft.Control = StopBtn
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Label5
+    AnchorSideBottom.Side = asrBottom
+    Left = 489
+    Height = 37
+    Hint = 'LAN_IP:5900'#10'Default password: socksgw'
+    Top = 209
+    Width = 151
+    Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Right = 7
+    EchoMode = emPassword
+    ParentShowHint = False
+    PasswordChar = '*'
+    ShowHint = True
+    TabOrder = 6
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
