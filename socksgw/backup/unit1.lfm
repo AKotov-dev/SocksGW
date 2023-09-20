@@ -214,7 +214,7 @@ object MainForm: TMainForm
     AnchorSideLeft.Control = StopBtn
     Left = 486
     Height = 32
-    Hint = 'ATTENTION!'#10'After reboot, access is only via VNC!'
+    Hint = 'ATTENTION!'#10'After reboot without monitor,'#10'access is only via VNC!'
     Top = 175
     Width = 129
     Caption = 'Without Display'
