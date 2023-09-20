@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 306
-  Height = 407
-  Top = 127
-  Width = 647
+  Left = 293
+  Height = 426
+  Top = 125
+  Width = 645
   Caption = 'SocksGW'
-  ClientHeight = 407
-  ClientWidth = 647
+  ClientHeight = 426
+  ClientWidth = 645
   OnCreate = FormCreate
   OnShow = FormShow
   SessionProperties = 'Left;Top'
@@ -15,18 +15,18 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 7
     Height = 17
-    Top = 271
+    Top = 291
     Width = 34
-    BorderSpacing.Top = 25
+    BorderSpacing.Top = 45
     Caption = 'WAN:'
     ParentColor = False
   end
   object Label2: TLabel
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrCenter
-    Left = 217
+    Left = 216
     Height = 17
-    Top = 271
+    Top = 291
     Width = 28
     Anchors = [akTop]
     Caption = 'LAN:'
@@ -39,10 +39,10 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 471
+    Left = 470
     Height = 37
-    Top = 261
-    Width = 169
+    Top = 281
+    Width = 168
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 7
@@ -51,9 +51,9 @@ object MainForm: TMainForm
   object Label4: TLabel
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrCenter
-    Left = 419
+    Left = 418
     Height = 17
-    Top = 271
+    Top = 291
     Width = 47
     Anchors = [akTop]
     Caption = 'LAN_IP:'
@@ -62,10 +62,10 @@ object MainForm: TMainForm
   object ApplyBtn: TSpeedButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 489
+    Left = 486
     Height = 48
     Top = 24
-    Width = 151
+    Width = 152
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 7
     Caption = 'APPLY'
@@ -86,7 +86,7 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = IP_RANGE
     Left = 7
     Height = 17
-    Top = 318
+    Top = 338
     Width = 403
     BorderSpacing.Top = 20
     BorderSpacing.Bottom = 2
@@ -100,8 +100,8 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     Left = 7
     Height = 37
-    Top = 337
-    Width = 633
+    Top = 357
+    Width = 631
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 5
     BorderSpacing.Top = 2
@@ -111,7 +111,7 @@ object MainForm: TMainForm
   object IPV6: TCheckBox
     AnchorSideLeft.Control = StopBtn
     AnchorSideTop.Side = asrBottom
-    Left = 489
+    Left = 486
     Height = 32
     Top = 136
     Width = 114
@@ -121,10 +121,10 @@ object MainForm: TMainForm
   object StopBtn: TSpeedButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 489
+    Left = 486
     Height = 48
     Top = 73
-    Width = 151
+    Width = 152
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 7
     Caption = 'STOP ENCRYPTION'
@@ -133,7 +133,7 @@ object MainForm: TMainForm
   object Shape1: TShape
     AnchorSideLeft.Control = ApplyBtn
     AnchorSideLeft.Side = asrCenter
-    Left = 552
+    Left = 550
     Height = 10
     Top = 8
     Width = 25
@@ -146,7 +146,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrCenter
     Left = 46
     Height = 37
-    Top = 261
+    Top = 281
     Width = 150
     BorderSpacing.Left = 5
     ItemHeight = 0
@@ -157,9 +157,9 @@ object MainForm: TMainForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrCenter
-    Left = 250
+    Left = 249
     Height = 37
-    Top = 261
+    Top = 281
     Width = 150
     BorderSpacing.Left = 5
     ItemHeight = 0
@@ -169,8 +169,8 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 387
-    Width = 647
+    Top = 406
+    Width = 645
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
     Font.Color = clGray
@@ -182,9 +182,9 @@ object MainForm: TMainForm
   object Label3: TLabel
     AnchorSideLeft.Control = StopBtn
     AnchorSideBottom.Control = VNCPassEdit
-    Left = 489
+    Left = 486
     Height = 17
-    Top = 190
+    Top = 215
     Width = 91
     Anchors = [akLeft, akBottom]
     BorderSpacing.Bottom = 2
@@ -195,24 +195,39 @@ object MainForm: TMainForm
     AnchorSideLeft.Control = StopBtn
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = Label5
-    AnchorSideBottom.Side = asrBottom
-    Left = 489
+    AnchorSideBottom.Control = LAN_IP
+    Left = 486
     Height = 37
     Hint = 'LAN_IP:5900'#10'Default password: socksgw'
-    Top = 209
-    Width = 151
+    Top = 234
+    Width = 152
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Right = 7
+    BorderSpacing.Bottom = 10
     EchoMode = emPassword
     ParentShowHint = False
     PasswordChar = '*'
     ShowHint = True
     TabOrder = 6
   end
+  object WDisplay: TCheckBox
+    AnchorSideLeft.Control = StopBtn
+    Left = 486
+    Height = 32
+    Hint = 'ATTENTION!'#10'After reboot, access is only via VNC!'
+    Top = 175
+    Width = 129
+    Caption = 'Without Display'
+    Font.Color = clRed
+    OnChange = WDisplayChange
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 7
+  end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
     Left = 408
-    Top = 64
+    Top = 32
   end
 end

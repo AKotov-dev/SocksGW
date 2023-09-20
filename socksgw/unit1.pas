@@ -13,6 +13,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    WDisplay: TCheckBox;
     VNCPassEdit: TEdit;
     Label3: TLabel;
     LAN: TComboBox;
@@ -35,6 +36,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure LANChange(Sender: TObject);
     procedure StopBtnClick(Sender: TObject);
+    procedure WDisplayChange(Sender: TObject);
   private
 
   public
@@ -246,8 +248,7 @@ begin
 
   //Ширина-Высота формы
   MainForm.Width := 10 + Label5.Width + 100 + ApplyBtn.Width + 10;
-  MainForm.Height := 10 + Label5.Height + 25 + WAN.Height + 15 +
-    Label6.Height + IP_RANGE.Height + 5 + StaticText1.Height;
+  MainForm.Height := 10 + IP_RANGE.Top + IP_RANGE.Height + 5 + StaticText1.Height;
 
   //Читаем параметры из конфигов
   //LAN
@@ -276,6 +277,11 @@ begin
       IPV6.Checked := True
     else
       IPV6.Checked := False;
+
+  //Withot Display (Experimental)
+  if FileExists('/etc/X11/xorg.conf') then WDisplay.Checked := True
+  else
+    WDisplay.Checked := False;
 
   //VNC_PASSWORD
   if RunCommand('/bin/bash', ['-c', 'cat /etc/socksgw/x11vnc.pass'], S) then
@@ -310,6 +316,44 @@ begin
   Application.ProcessMessages;
   RunCommand('/bin/bash', ['-c',
     'systemctl disable tun2socks; systemctl stop tun2socks'], k);
+end;
+
+//Отключить дисплей (экспериментальная опция, нужен тест работы с VNC!)
+procedure TMainForm.WDisplayChange(Sender: TObject);
+var
+  S: TStringList;
+begin
+  //Обязательный запуск VNC, поскольку дисплей будет отключен!
+  if Trim(VNCPassEdit.Text) = '' then VNCPassEdit.Text := 'socksgw';
+
+  try
+    S := TStringList.Create;
+
+    if WDisplay.Checked then
+    begin
+      S.Add('Section "Device"');
+      S.Add('      Identifier      "Configured Video Device"');
+      S.Add('      Driver          "vesa"');
+      S.Add('      Option "ConnectedMonitor" "CRT,CRT"');
+      S.Add('EndSection');
+      S.Add('');
+      S.Add('Section "Monitor"');
+      S.Add('      Identifier      "Configured Monitor"');
+      S.Add('EndSection');
+      S.Add('');
+      S.Add('Section "Screen"');
+      S.Add('      Identifier      "Default Screen"');
+      S.Add('      Monitor         "Configured Monitor"');
+      S.Add('      Device          "Configured Video Device"');
+      S.Add('EndSection');
+      S.Add('');
+      S.SaveToFile('/etc/X11/xorg.conf');
+    end
+    else
+      DeleteFile('/etc/X11/xorg.conf');
+  finally
+    S.Free;
+  end;
 end;
 
 end.

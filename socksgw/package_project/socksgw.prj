@@ -2,7 +2,7 @@
 name=socksgw
 
 [VERSION]
-version=0.2
+version=0.3
 
 [RELEASE]
 release=0.mrx9
@@ -79,9 +79,13 @@ devtool=Lazarus
 toolversion=2.2.4
 
 [INFO]
-0=v0.2
-1=+ Access from LAN via VNC, port 5900, default password `socksgw`
+0=v0.3
+1=+ VNC (LAN) access without display (experimental)
 2=+ RPM packages for MgaRemix/Mageia (9)
 3=
-4=v0.1
-5=-Initial release
+4=v0.2
+5=+ Access from LAN via VNC, port 5900, default password `socksgw`
+6=+ RPM packages for MgaRemix/Mageia (9)
+7=
+8=v0.1
+9=-Initial release

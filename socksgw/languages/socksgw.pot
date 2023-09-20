@@ -66,3 +66,15 @@ msgid ""
 "Default password: socksgw"
 msgstr ""
 
+#: tmainform.wdisplay.caption
+msgctxt "tmainform.wdisplay.caption"
+msgid "Without Display"
+msgstr ""
+
+#: tmainform.wdisplay.hint
+msgid ""
+"ATTENTION!\n"
+"After reboot without monitor,\n"
+"access is only via VNC!"
+msgstr ""
+
