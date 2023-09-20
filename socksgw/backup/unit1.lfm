@@ -219,7 +219,6 @@ object MainForm: TMainForm
     Width = 129
     Caption = 'Without Display'
     Font.Color = clRed
-    OnChange = WDisplayChange
     ParentFont = False
     ParentShowHint = False
     ShowHint = True
