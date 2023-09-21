@@ -93,17 +93,3 @@ msgstr ""
 "LAN_IP:5900\n"
 "Пароль по умолчанию: socksgw"
 
-#: tmainform.wdisplay.caption
-msgctxt "tmainform.wdisplay.caption"
-msgid "Without Display"
-msgstr "Без Дисплея"
-
-#: tmainform.wdisplay.hint
-msgid ""
-"ATTENTION!\n"
-"After reboot without monitor,\n"
-"access is only via VNC!"
-msgstr ""
-"ВНИМАНИЕ!\n"
-"После перезагрузки без монитора,\n"
-"доступ только через VNC!"

@@ -31,7 +31,7 @@ urlcopy=https://github.com/AKotov-dev/SocksGW
 license=GPLv3
 
 [DEPS]
-deps=fping systemd zenity curl gtk2 polkit xraygui dnscrypt-gui dnsmasq iptables x11vnc
+deps=fping systemd zenity curl gtk2 polkit xraygui dnscrypt-gui dnsmasq iptables x11vnc openssh-server
 
 [META]
 meta=0
@@ -80,7 +80,7 @@ toolversion=2.2.4
 
 [INFO]
 0=v0.3
-1=+ VNC (LAN) access without display (experimental)
+1=+ SSH - LAN_IP:22
 2=+ RPM packages for MgaRemix/Mageia (9)
 3=
 4=v0.2

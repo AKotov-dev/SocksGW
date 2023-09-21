@@ -46,7 +46,7 @@ object MainForm: TMainForm
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 7
-    TabOrder = 5
+    TabOrder = 4
   end
   object Label4: TLabel
     AnchorSideTop.Control = Label1
@@ -106,7 +106,7 @@ object MainForm: TMainForm
     BorderSpacing.Left = 5
     BorderSpacing.Top = 2
     BorderSpacing.Right = 7
-    TabOrder = 6
+    TabOrder = 5
   end
   object IPV6: TCheckBox
     AnchorSideLeft.Control = StopBtn
@@ -150,7 +150,7 @@ object MainForm: TMainForm
     Width = 150
     BorderSpacing.Left = 5
     ItemHeight = 0
-    TabOrder = 3
+    TabOrder = 2
   end
   object LAN: TComboBox
     AnchorSideLeft.Control = Label2
@@ -164,7 +164,7 @@ object MainForm: TMainForm
     BorderSpacing.Left = 5
     ItemHeight = 0
     OnChange = LANChange
-    TabOrder = 4
+    TabOrder = 3
   end
   object StaticText1: TStaticText
     Left = 0
@@ -177,14 +177,14 @@ object MainForm: TMainForm
     Font.Height = -11
     Font.Name = 'Sans'
     ParentFont = False
-    TabOrder = 7
+    TabOrder = 6
   end
   object Label3: TLabel
     AnchorSideLeft.Control = StopBtn
     AnchorSideBottom.Control = VNCPassEdit
     Left = 486
     Height = 17
-    Top = 215
+    Top = 190
     Width = 91
     Anchors = [akLeft, akBottom]
     BorderSpacing.Bottom = 2
@@ -195,46 +195,20 @@ object MainForm: TMainForm
     AnchorSideLeft.Control = StopBtn
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = LAN_IP
+    AnchorSideBottom.Control = Label5
+    AnchorSideBottom.Side = asrBottom
     Left = 486
     Height = 37
     Hint = 'LAN_IP:5900'#10'Default password: socksgw'
-    Top = 234
+    Top = 209
     Width = 152
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Right = 7
-    BorderSpacing.Bottom = 10
     EchoMode = emPassword
     ParentShowHint = False
     PasswordChar = '*'
     ShowHint = True
-    TabOrder = 2
-  end
-  object WDisplay: TCheckBox
-    AnchorSideLeft.Control = StopBtn
-    Left = 486
-    Height = 32
-    Hint = 'ATTENTION!'#10'After reboot without monitor,'#10'access is only via VNC!'
-    Top = 175
-    Width = 129
-    Caption = 'Without Display'
-    Font.Color = clRed
-    ParentFont = False
-    ParentShowHint = False
-    ShowHint = True
     TabOrder = 1
-  end
-  object ProgressBar1: TProgressBar
-    AnchorSideLeft.Control = Owner
-    AnchorSideRight.Control = Owner
-    AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = StaticText1
-    Left = 0
-    Height = 9
-    Top = 404
-    Width = 645
-    Anchors = [akLeft, akRight, akBottom]
-    TabOrder = 8
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>

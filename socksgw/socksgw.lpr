@@ -11,7 +11,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms,
   Unit1,
-  update_trd, portscan_trd, start_trd { you can add units after this };
+  update_trd, portscan_trd;
 
 {$R *.res}
 

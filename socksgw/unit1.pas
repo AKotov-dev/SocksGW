@@ -13,8 +13,6 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
-    ProgressBar1: TProgressBar;
-    WDisplay: TCheckBox;
     VNCPassEdit: TEdit;
     Label3: TLabel;
     LAN: TComboBox;
@@ -48,7 +46,7 @@ var
 
 implementation
 
-uses update_trd, portscan_trd, start_trd;
+uses update_trd, portscan_trd;
 
 {$R *.lfm}
 
@@ -159,8 +157,8 @@ begin
     S.Add('iptables -t mangle -N tun2socks');
     S.Add('#Отправляем в неё всё, кроме DNS из $lan в прокси/tun2socks');
     S.Add('#iptables -t mangle -I PREROUTING -i $lan -j MARK --set-mark 3');
-    S.Add('iptables -t mangle -I PREROUTING -i $lan -p udp -m multiport ! --dport 53,5900 -j MARK --set-mark 3');
-    S.Add('iptables -t mangle -I PREROUTING -i $lan -p tcp -m multiport ! --dport 53,5900 -j MARK --set-mark 3');
+    S.Add('iptables -t mangle -I PREROUTING -i $lan -p udp -m multiport ! --dport 22,53,5900 -j MARK --set-mark 3');
+    S.Add('iptables -t mangle -I PREROUTING -i $lan -p tcp -m multiport ! --dport 22,53,5900 -j MARK --set-mark 3');
     S.Add('');
     S.Add('#Отправляем https трафик в прокси');
     S.Add('#iptables -t mangle -A OUTPUT -p tcp --dport 80 -j MARK --set-mark 3');
@@ -230,59 +228,20 @@ begin
 
     S.SaveToFile('/etc/systemd/system/x11vnc.service');
 
-    //---Отключить дисплей (экспериментальная опция, нужен тест работы с VNC!)
-    RunCommand('/bin/bash', ['-c', 'grep "nokmsboot" /etc/default/grub'], k);
-    if WDisplay.Checked then
-    begin
-      if Trim(k) = '' then
-      begin
-        RunCommand('/bin/bash', ['-c', 'sed -i ' + '''' +
-          's/noiswmd/noiswmd nokmsboot/g' + '''' + ' /etc/default/grub'], k);
-        FShowLogTRD := ShowLogTRD.Create(False);
-        FShowLogTRD.Priority := tpNormal;
-      end;
-    end
-    else
-    begin
-      if Trim(k) <> '' then
-      begin
-        RunCommand('/bin/bash', ['-c', 'sed -i ' + '''' +
-          's/noiswmd nokmsboot/noiswmd/g' + '''' + ' /etc/default/grub'], k);
-        FShowLogTRD := ShowLogTRD.Create(False);
-        FShowLogTRD.Priority := tpNormal;
-      end;
-    end;
-
-   { if WDisplay.Checked then
-    begin
-      S.Clear;
-      S.Add('Section "Device"');
-      S.Add('      Identifier      "Configured Video Device"');
-      S.Add('      Driver          "vesa"');
-      S.Add('      Option "ConnectedMonitor" "CRT,CRT"');
-      S.Add('EndSection');
-      S.Add('');
-      S.Add('Section "Monitor"');
-      S.Add('      Identifier      "Configured Monitor"');
-      S.Add('EndSection');
-      S.Add('');
-      S.Add('Section "Screen"');
-      S.Add('      Identifier      "Default Screen"');
-      S.Add('      Monitor         "Configured Monitor"');
-      S.Add('      Device          "Configured Video Device"');
-      S.Add('EndSection');
-      S.Add('');
-      S.SaveToFile('/etc/X11/xorg.conf');
-    end
-    else
-      DeleteFile('/etc/X11/xorg.conf');  }
-
-    //--------
+    //SSH: LAN_IP:22
+    S.Clear;
+    S.Add('Include /etc/ssh/sshd_config.d/*.conf');
+    S.Add('ListenAddress ' + LAN_IP.Text);
+    S.Add('#ListenAddress ::');
+    S.Add('AuthorizedKeysFile	.ssh/authorized_keys');
+    S.Add('Subsystem	sftp	/usr/libexec/openssh/sftp-server');
+    S.Add('');
+    S.SaveToFile('/etc/ssh/sshd_config');
 
     //Старт dnamsq/tun2socks/x11vnc
     Application.ProcessMessages;
     RunCommand('/bin/bash', ['-c', 'echo "' + VNCPassEdit.Text +
-      '"> /etc/socksgw/x11vnc.pass; systemctl enable dnsmasq tun2socks x11vnc; systemctl restart dnsmasq tun2socks x11vnc'], k);
+      '"> /etc/socksgw/x11vnc.pass; systemctl enable dnsmasq tun2socks x11vnc sshd; systemctl restart dnsmasq tun2socks x11vnc sshd'], k);
   finally
     S.Free;
   end;
@@ -298,8 +257,7 @@ begin
 
   //Ширина-Высота формы
   MainForm.Width := 10 + Label5.Width + 100 + ApplyBtn.Width + 10;
-  MainForm.Height := 10 + IP_RANGE.Top + IP_RANGE.Height + 5 +
-    ProgressBar1.Height + StaticText1.Height;
+  MainForm.Height := 10 + IP_RANGE.Top + IP_RANGE.Height + 5 + StaticText1.Height;
 
   //Читаем параметры из конфигов
   //LAN
@@ -330,15 +288,15 @@ begin
       IPV6.Checked := False;
 
   //Withot Display (Experimental)
-  if RunCommand('/bin/bash', ['-c', 'grep "nokmsboot" /etc/default/grub'], S) then
+ {if RunCommand('/bin/bash', ['-c', 'grep "nokmsboot" /etc/default/grub'], S) then
     if Trim(S) <> '' then
-      WDisplay.Checked := True
+      SSH.Checked := True
     else
-      WDisplay.Checked := False;
+      SSH.Checked := False;
 
-  {if FileExists('/etc/X11/xorg.conf') then WDisplay.Checked := True
+  if FileExists('/etc/X11/xorg.conf') then SSH.Checked := True
   else
-    WDisplay.Checked := False;}
+    SSH.Checked := False;}
 
   //VNC_PASSWORD
   if RunCommand('/bin/bash', ['-c', 'cat /etc/socksgw/x11vnc.pass'], S) then

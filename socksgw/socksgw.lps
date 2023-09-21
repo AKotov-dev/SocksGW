@@ -38,9 +38,10 @@
       <Unit>
         <Filename Value="socksgw.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="1"/>
         <CursorPos X="30" Y="8"/>
-        <UsageCount Value="29"/>
+        <UsageCount Value="30"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
@@ -50,9 +51,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="253"/>
-        <CursorPos X="43" Y="278"/>
-        <UsageCount Value="29"/>
+        <TopLine Value="4"/>
+        <CursorPos X="35" Y="8"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -61,53 +62,24 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19"/>
-        <UsageCount Value="28"/>
+        <UsageCount Value="29"/>
       </Unit>
       <Unit>
         <Filename Value="portscan_trd.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="21"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="28"/>
       </Unit>
       <Unit>
         <Filename Value="start_trd.pas"/>
-        <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
-        <CursorPos X="44" Y="21"/>
-        <UsageCount Value="22"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="49"/>
+        <CursorPos X="12" Y="68"/>
+        <UsageCount Value="23"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="264" Column="3" TopLine="258"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="220" Column="15" TopLine="204"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="229" Column="116" TopLine="207"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="230" Column="116" TopLine="208"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="214" Column="55" TopLine="212"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="280" Column="33" TopLine="268"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="231" Column="8" TopLine="215"/>
-      </Position>
+    <JumpHistory HistoryIndex="26">
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="280" Column="32" TopLine="261"/>
@@ -169,22 +141,6 @@
         <Caret Line="240" Column="5" TopLine="225"/>
       </Position>
       <Position>
-        <Filename Value="start_trd.pas"/>
-        <Caret Line="87" Column="40" TopLine="67"/>
-      </Position>
-      <Position>
-        <Filename Value="start_trd.pas"/>
-        <Caret Line="8" Column="29"/>
-      </Position>
-      <Position>
-        <Filename Value="start_trd.pas"/>
-        <Caret Line="21"/>
-      </Position>
-      <Position>
-        <Filename Value="start_trd.pas"/>
-        <Caret Line="50" Column="39" TopLine="38"/>
-      </Position>
-      <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="12" Column="28"/>
       </Position>
@@ -199,6 +155,38 @@
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="252" Column="97" TopLine="228"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="292" Column="132" TopLine="217"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="291" Column="132" TopLine="262"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="234" Column="13" TopLine="224"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="232" TopLine="260"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="331" Column="34" TopLine="319"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="236" Column="26" TopLine="221"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="235" Column="26" TopLine="220"/>
+      </Position>
+      <Position>
+        <Filename Value="socksgw.lpr"/>
+        <Caret Line="8" Column="30"/>
       </Position>
     </JumpHistory>
     <RunParams>
