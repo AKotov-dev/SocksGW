@@ -287,6 +287,17 @@ begin
     else
       IPV6.Checked := False;
 
+  //Withot Display (Experimental)
+ {if RunCommand('/bin/bash', ['-c', 'grep "nokmsboot" /etc/default/grub'], S) then
+    if Trim(S) <> '' then
+      SSH.Checked := True
+    else
+      SSH.Checked := False;
+
+  if FileExists('/etc/X11/xorg.conf') then SSH.Checked := True
+  else
+    SSH.Checked := False;}
+
   //VNC_PASSWORD
   if RunCommand('/bin/bash', ['-c', 'cat /etc/socksgw/x11vnc.pass'], S) then
     VNCPassEdit.Text := Trim(S);
@@ -305,8 +316,10 @@ var
   s: ansistring;
 begin
   //Список интерфейсов
-  RunCommand('/bin/bash', ['-c', 'ip -br a | grep ' + LAN.Text +
-    ' | awk ' + '''' + '{print $3}' + '''' + '| cut -f1 -d"/"'], s);
+  RunCommand('/bin/bash', ['-c',
+    // 'ip a | grep ^[[:digit:]] | cut -f2 -d":" | tr -d " " | tr "\n" ";"'], s);
+    'ip -br a | grep ' + LAN.Text + ' | awk ' + '''' + '{print $3}' +
+    '''' + '| cut -f1 -d"/"'], s);
   LAN_IP.Text := Trim(S);
 end;
 

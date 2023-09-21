@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#Отключаем скринсавер
+gsettings set org.mate.screensaver idle-activation-enabled 'false'
+gsettings set org.mate.screensaver lock-enabled 'false'
+gsettings set org.mate.power-manager sleep-display-ac '0'
+
 pkexec /usr/share/socksgw/socksgw
 
 exit;

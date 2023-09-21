@@ -4,24 +4,24 @@ It contains the necessary information to recreation the program from the source 
 Information about the program:
 ---
 Name of program: SocksGW
-Version of program: 0.1
+Version of program: 0.3
 Program development tool: Lazarus
 Version of program development tool: 2.2.4
-URL the sources + binaries of the author: 11
+URL the sources + binaries of the author: https://github.com/AKotov-dev/SocksGW
 
 Information about the rpm-package:
 ---
 Build method: Portable RPM
-Time stamp: 14-9-23 20:38:20
+Time stamp: 21-9-23 16:13:14
 
 Name: socksgw
-Version: 0.1
+Version: 0.3
 Release: 0.mrx9
 Group: Accessibility
 License: GPLv3
 Maintainer: Alex Kotov
 Vendor: alex_q_2000 (C) 2023
-URL of the copy source codes: 111
+URL of the copy source codes: https://github.com/AKotov-dev/SocksGW
 
 Summary: Socks5 gateway configurator
 
@@ -33,4 +33,18 @@ More information: /usr/share/doc/package_name/repack.txt
 
 Package dependencies:
 ---
-fping systemd zenity curl gtk2 polkit
+fping systemd zenity curl gtk2 polkit xraygui dnscrypt-gui dnsmasq iptables x11vnc openssh-server
+
+Additionally information:
+---
+v0.3
++ SSH - LAN_IP:22
++ Disabling screensaver and sleep mode
++ RPM packages for MgaRemix/Mageia (9)
+
+v0.2
++ Access from LAN via VNC, port 5900, default password `socksgw`
++ RPM packages for MgaRemix/Mageia (9)
+
+v0.1
+-Initial release
