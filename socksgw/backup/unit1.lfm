@@ -1,10 +1,10 @@
 object MainForm: TMainForm
   Left = 293
-  Height = 426
+  Height = 433
   Top = 125
   Width = 645
   Caption = 'SocksGW'
-  ClientHeight = 426
+  ClientHeight = 433
   ClientWidth = 645
   OnCreate = FormCreate
   OnShow = FormShow
@@ -169,7 +169,7 @@ object MainForm: TMainForm
   object StaticText1: TStaticText
     Left = 0
     Height = 20
-    Top = 406
+    Top = 413
     Width = 645
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
@@ -223,6 +223,18 @@ object MainForm: TMainForm
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
+  end
+  object ProgressBar1: TProgressBar
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = StaticText1
+    Left = 0
+    Height = 9
+    Top = 404
+    Width = 645
+    Anchors = [akLeft, akRight, akBottom]
+    TabOrder = 8
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>

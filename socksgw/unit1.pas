@@ -13,6 +13,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    ProgressBar1: TProgressBar;
     WDisplay: TCheckBox;
     VNCPassEdit: TEdit;
     Label3: TLabel;
@@ -47,7 +48,7 @@ var
 
 implementation
 
-uses update_trd, portscan_trd;
+uses update_trd, portscan_trd, start_trd;
 
 {$R *.lfm}
 
@@ -89,6 +90,7 @@ procedure TMainForm.ApplyBtnClick(Sender: TObject);
 var
   k: ansistring;
   S: TStringList;
+  FShowLogTRD: TThread;
 begin
   try
     //Создаём пускач /etc/socksgw/socksgw.sh
@@ -221,15 +223,37 @@ begin
     S.Add('');
     S.Add('[Service]');
     S.Add('Type=simple');
-    S.Add('ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -ncache 10 -passwdfile /etc/socksgw/x11vnc.pass -rfbport 5900 -shared -listen ' + LAN_IP.Text);
+    S.Add('ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -passwdfile /etc/socksgw/x11vnc.pass -rfbport 5900 -shared -listen ' + LAN_IP.Text);
     S.Add('');
     S.Add('[Install]');
     S.Add('WantedBy=multi-user.target');
 
     S.SaveToFile('/etc/systemd/system/x11vnc.service');
 
-    //Отключить дисплей (экспериментальная опция, нужен тест работы с VNC!)
+    //---Отключить дисплей (экспериментальная опция, нужен тест работы с VNC!)
+    RunCommand('/bin/bash', ['-c', 'grep "nokmsboot" /etc/default/grub'], k);
     if WDisplay.Checked then
+    begin
+      if Trim(k) = '' then
+      begin
+        RunCommand('/bin/bash', ['-c', 'sed -i ' + '''' +
+          's/noiswmd/noiswmd nokmsboot/g' + '''' + ' /etc/default/grub'], k);
+        FShowLogTRD := ShowLogTRD.Create(False);
+        FShowLogTRD.Priority := tpNormal;
+      end;
+    end
+    else
+    begin
+      if Trim(k) <> '' then
+      begin
+        RunCommand('/bin/bash', ['-c', 'sed -i ' + '''' +
+          's/noiswmd nokmsboot/noiswmd/g' + '''' + ' /etc/default/grub'], k);
+        FShowLogTRD := ShowLogTRD.Create(False);
+        FShowLogTRD.Priority := tpNormal;
+      end;
+    end;
+
+   { if WDisplay.Checked then
     begin
       S.Clear;
       S.Add('Section "Device"');
@@ -251,7 +275,9 @@ begin
       S.SaveToFile('/etc/X11/xorg.conf');
     end
     else
-      DeleteFile('/etc/X11/xorg.conf');
+      DeleteFile('/etc/X11/xorg.conf');  }
+
+    //--------
 
     //Старт dnamsq/tun2socks/x11vnc
     Application.ProcessMessages;
@@ -272,7 +298,8 @@ begin
 
   //Ширина-Высота формы
   MainForm.Width := 10 + Label5.Width + 100 + ApplyBtn.Width + 10;
-  MainForm.Height := 10 + IP_RANGE.Top + IP_RANGE.Height + 5 + StaticText1.Height;
+  MainForm.Height := 10 + IP_RANGE.Top + IP_RANGE.Height + 5 +
+    ProgressBar1.Height + StaticText1.Height;
 
   //Читаем параметры из конфигов
   //LAN
@@ -303,9 +330,15 @@ begin
       IPV6.Checked := False;
 
   //Withot Display (Experimental)
-  if FileExists('/etc/X11/xorg.conf') then WDisplay.Checked := True
+  if RunCommand('/bin/bash', ['-c', 'grep "nokmsboot" /etc/default/grub'], S) then
+    if Trim(S) <> '' then
+      WDisplay.Checked := True
+    else
+      WDisplay.Checked := False;
+
+  {if FileExists('/etc/X11/xorg.conf') then WDisplay.Checked := True
   else
-    WDisplay.Checked := False;
+    WDisplay.Checked := False;}
 
   //VNC_PASSWORD
   if RunCommand('/bin/bash', ['-c', 'cat /etc/socksgw/x11vnc.pass'], S) then
