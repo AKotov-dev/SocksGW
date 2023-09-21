@@ -21,7 +21,7 @@ SocksGW - это инструмент, позволяющий превратит
 Перезагрузите компьютер клиента, чтобы он принял новые настройки шлюза.
 
 **UPD-v0.2:** Доступ из LAN по VNC:5900, пароль по умолчанию - `socksgw`. На клиенте можно использовать, например, [TigerVNC](https://sourceforge.net/projects/tigervnc/).  
-**UPD-v0.3:** Доступ из LAN по SSH:22, пароль по умолчанию - `ghbdtn`. На клиенте можно использовать, например, [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)  
+**UPD-v0.3:** Доступ из LAN по SSH:22, пароль по умолчанию - `ghbdtn`. На клиенте можно использовать, например, [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).  
   
 Структурная схема:
 ---
