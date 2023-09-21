@@ -217,11 +217,11 @@ begin
     S.Clear;
     S.Add('[Unit]');
     S.Add('Description=Start x11vnc at startup');
-    S.Add('After=multi-user.target');
+    S.Add('After=graphical.target multi-user.target');
     S.Add('');
     S.Add('[Service]');
     S.Add('Type=simple');
-    S.Add('ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -passwdfile /etc/socksgw/x11vnc.pass -rfbport 5900 -shared -listen ' + LAN_IP.Text);
+    S.Add('ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -ncache 10 -passwdfile /etc/socksgw/x11vnc.pass -rfbport 5900 -shared -listen ' + LAN_IP.Text);
     S.Add('');
     S.Add('[Install]');
     S.Add('WantedBy=multi-user.target');

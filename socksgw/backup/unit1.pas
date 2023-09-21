@@ -217,7 +217,7 @@ begin
     S.Clear;
     S.Add('[Unit]');
     S.Add('Description=Start x11vnc at startup');
-    S.Add('After=multi-user.target');
+    S.Add('After=graphical.target multi-user.target');
     S.Add('');
     S.Add('[Service]');
     S.Add('Type=simple');
@@ -231,6 +231,7 @@ begin
     //Отключить дисплей (экспериментальная опция, нужен тест работы с VNC!)
     if WDisplay.Checked then
     begin
+      S.Clear;
       S.Add('Section "Device"');
       S.Add('      Identifier      "Configured Video Device"');
       S.Add('      Driver          "vesa"');
