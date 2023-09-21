@@ -31,7 +31,7 @@ urlcopy=https://github.com/AKotov-dev/SocksGW
 license=GPLv3
 
 [DEPS]
-deps=fping systemd zenity curl gtk2 polkit xraygui dnscrypt-gui dnsmasq iptables x11vnc openssh-server
+deps=fping systemd zenity curl gtk2 polkit xraygui dnscrypt-gui dnsmasq iptables x11vnc sshd
 
 [META]
 meta=0
