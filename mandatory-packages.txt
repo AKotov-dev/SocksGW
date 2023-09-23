@@ -11,7 +11,7 @@ urpmi --auto wpa_supplicant
 
 Other:
 ---
-urpmi --auto firefox mc htop draklive-install grub2-efi drakclock-patch pchanger scleaner dnscrypt-gui xraygui socksgw initrd-builder 
+urpmi --auto firefox mc htop draklive-install grub2-efi pluma drakclock-patch pchanger scleaner dnscrypt-gui xraygui socksgw initrd-builder
 
 Disabling unnecessary services:
 ---
