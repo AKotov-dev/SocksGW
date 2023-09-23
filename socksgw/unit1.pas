@@ -245,7 +245,7 @@ begin
     Application.ProcessMessages;
     RunCommand('/bin/bash', ['-c', 'echo "' + VNCPassEdit.Text +
       '"> /etc/socksgw/x11vnc.pass; [[ -d /etc/lightdm ]] && ' +
-      'sed -i "s/autologin-user.*/autologin-user=$(cat /tmp/socksgw-user)/g" /etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf; '
+      'sed -i "s/^autologin-user.*/autologin-user=$(cat /tmp/socksgw-user)/g" /etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf; '
       + 'systemctl enable dnsmasq tun2socks x11vnc sshd; systemctl restart dnsmasq tun2socks x11vnc sshd'], k);
   finally
     MainForm.Caption := Application.Title;
