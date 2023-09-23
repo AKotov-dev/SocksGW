@@ -28,6 +28,8 @@ SocksGW - это инструмент, позволяющий превратит
   
 **UPD-v0.3:** Доступ из LAN по SSH:22; дефолтные логин `marsik`, пароль `ghbdtn`. Подключение через [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).  
   
+**UPD-v0.4:** Автологин после первого запуска SocksGW (`APPLY`)  
+  
 Структурная схема:
 ---
 LAN->DNS->DNSMASQ->DNSCrypt-Proxy->WAN  
