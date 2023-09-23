@@ -88,11 +88,12 @@ procedure TMainForm.ApplyBtnClick(Sender: TObject);
 var
   k: ansistring;
   S: TStringList;
-  FShowLogTRD: TThread;
 begin
   try
+    MainForm.Caption := Application.Title + ' [...working]';
     //Создаём пускач /etc/socksgw/socksgw.sh
     S := TStringList.Create;
+
     S.Add('#!/bin/bash');
     S.Add('');
     S.Add('#Интерфейсы; tun2socks - gw');
@@ -238,11 +239,14 @@ begin
     S.Add('');
     S.SaveToFile('/etc/ssh/sshd_config');
 
-    //Старт dnamsq/tun2socks/x11vnc/sshd
+    //Старт dnamsq/tun2socks/x11vnc/sshd + autologin
     Application.ProcessMessages;
     RunCommand('/bin/bash', ['-c', 'echo "' + VNCPassEdit.Text +
-      '"> /etc/socksgw/x11vnc.pass; systemctl enable dnsmasq tun2socks x11vnc sshd; systemctl restart dnsmasq tun2socks x11vnc sshd'], k);
+      '"> /etc/socksgw/x11vnc.pass; [[ -d /etc/lightdm ]] && ' +
+      'sed -i "s/autologin-user.*/autologin-user=$(cat /tmp/socksgw-user)/g" /etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf; '
+      + 'systemctl enable dnsmasq tun2socks x11vnc sshd; systemctl restart dnsmasq tun2socks x11vnc sshd'], k);
   finally
+    MainForm.Caption := Application.Title;
     S.Free;
   end;
 end;
@@ -287,17 +291,6 @@ begin
     else
       IPV6.Checked := False;
 
-  //Withot Display (Experimental)
- {if RunCommand('/bin/bash', ['-c', 'grep "nokmsboot" /etc/default/grub'], S) then
-    if Trim(S) <> '' then
-      SSH.Checked := True
-    else
-      SSH.Checked := False;
-
-  if FileExists('/etc/X11/xorg.conf') then SSH.Checked := True
-  else
-    SSH.Checked := False;}
-
   //VNC_PASSWORD
   if RunCommand('/bin/bash', ['-c', 'cat /etc/socksgw/x11vnc.pass'], S) then
     VNCPassEdit.Text := Trim(S);
@@ -311,15 +304,13 @@ begin
   FUpdateThread.Priority := tpNormal;
 end;
 
+//Список интерфейсов
 procedure TMainForm.LANChange(Sender: TObject);
 var
   s: ansistring;
 begin
-  //Список интерфейсов
-  RunCommand('/bin/bash', ['-c',
-    // 'ip a | grep ^[[:digit:]] | cut -f2 -d":" | tr -d " " | tr "\n" ";"'], s);
-    'ip -br a | grep ' + LAN.Text + ' | awk ' + '''' + '{print $3}' +
-    '''' + '| cut -f1 -d"/"'], s);
+  RunCommand('/bin/bash', ['-c', 'ip -br a | grep ' + LAN.Text +
+    ' | awk ' + '''' + '{print $3}' + '''' + '| cut -f1 -d"/"'], s);
   LAN_IP.Text := Trim(S);
 end;
 
