@@ -18,8 +18,7 @@ SocksGW - это инструмент, позволяющий превратит
 4. Запустите XRayGUI, загрузите конф вашего VPS и `Старт`: 127.0.0.1:1080
  
 После этого введите настройки SocksGW и нажмите `APPLY`
-![](https://github.com/AKotov-dev/SocksGW/blob/main/Screenshot4.png)
-
+![](https://github.com/AKotov-dev/SocksGW/blob/main/Screenshot4.png)  
 Перезагрузите компьютер клиента, чтобы он принял новые настройки шлюза.
 
 **UPD-v0.2:** Доступ из LAN по VNC:5900, пароль по умолчанию - `socksgw`. Подключение через [TigerVNC](https://sourceforge.net/projects/tigervnc/).  
