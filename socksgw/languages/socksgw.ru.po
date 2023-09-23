@@ -77,8 +77,8 @@ msgid "DHCP (Local IP range. For example: 192.168.1.50,192.168.1.250,72h):"
 msgstr "DHCP (Диапазон локальных IP. Например: 192.168.1.50,192.168.1.250,72h):"
 
 #: tmainform.statictext1.caption
-msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
-msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
+msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
 
 #: tmainform.stopbtn.caption
 msgid "STOP ENCRYPTION"
@@ -92,4 +92,3 @@ msgid ""
 msgstr ""
 "LAN_IP:5900\n"
 "Пароль по умолчанию: socksgw"
-

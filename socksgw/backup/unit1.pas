@@ -90,7 +90,9 @@ var
   S: TStringList;
 begin
   try
+    //Прогресс
     MainForm.Caption := Application.Title + ' [...working]';
+
     //Создаём пускач /etc/socksgw/socksgw.sh
     S := TStringList.Create;
 

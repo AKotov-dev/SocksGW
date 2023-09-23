@@ -75,9 +75,13 @@ object MainForm: TMainForm
     Left = 7
     Height = 238
     Top = 8
-    Width = 378
+    Width = 408
     Caption = 'Before setting up SocksGW, do the following:'#10'  '#10'1. Configure WAN and LAN network cards via Control Center:'#10'-WAN to the provider, LAN to the local network'#10' '#10'2. Check Internet access'#10' '#10'3. Launch DNSCrypt-GUI, specify port "2053" and run'#10'-127.0.0.1:2053'#10' '#10'4. Launch XRayGUI, load your VPS configuration and run'#10'-127.0.0.1:1080'#10' '#10'After that, enter the details below and click the "APPLY" button'
+    Font.Height = -13
+    Font.Name = 'Sans'
+    Font.Style = [fsItalic]
     ParentColor = False
+    ParentFont = False
   end
   object Label6: TLabel
     AnchorSideLeft.Control = IP_RANGE
@@ -113,7 +117,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 486
     Height = 32
-    Top = 136
+    Top = 138
     Width = 114
     Caption = 'IPv6 (On/Off)'
     TabOrder = 0
