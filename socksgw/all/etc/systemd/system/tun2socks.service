@@ -6,9 +6,7 @@ Wants=network-online.target nss-lookup.target
 [Service]
 Type=simple
 
-ExecStart=/bin/bash -c '/etc/socksgw/tun2socks.sh start'
-
-ExecStop=/bin/bash -c '/etc/socksgw/tun2socks.sh stop'
+ExecStart=/etc/socksgw/tun2socks.sh
 
 RemainAfterExit=yes
 

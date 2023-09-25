@@ -5,13 +5,9 @@ Exclude:
 ---
 urpme --auto shorewall-core msec mgaonline mageiawelcome malcontent dasher atril
 
-WiFi, xl2tpd, pptpd, vpn?
----
-urpmi --auto wpa_supplicant
-
 Other:
 ---
-urpmi --auto firefox mc htop draklive-install grub2-efi pluma drakclock-patch pchanger scleaner dnscrypt-gui xraygui socksgw initrd-builder
+urpmi --auto firefox mc htop draklive-install grub2-efi pluma drakclock-patch pchanger scleaner dnscrypt-gui xraygui socksgw initrd-builder nm-lite
 
 Disabling unnecessary services:
 ---

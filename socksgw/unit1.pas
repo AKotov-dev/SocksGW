@@ -91,7 +91,7 @@ var
 begin
   try
     //Прогресс
-    MainForm.Caption := Application.Title + ' [...working]';
+    MainForm.Caption := Application.Title + ' [...starting]';
 
     //Создаём пускач /etc/socksgw/socksgw.sh
     S := TStringList.Create;
@@ -143,7 +143,7 @@ begin
     S.Add('iptables -A FORWARD -i $lan -o $wan -j ACCEPT');
     S.Add('iptables -t nat -A POSTROUTING -o $wan -j MASQUERADE');
     S.Add('');
-    S.Add('if [ "$1" != "stop" ]; then');
+    //    S.Add('if [ "$1" != "stop" ]; then');
     S.Add('#Создаём интерфейс tun2socks с привязкой к серверу socks5');
     S.Add('tun2socks-linux-amd64 -device tun://tun2socks -proxy socks5://127.0.0.1:1080 &');
     S.Add('#Ждём появления tun2socks (5 сек)');
@@ -158,10 +158,10 @@ begin
     S.Add('');
     S.Add('#Создаём цепочку для марков');
     S.Add('iptables -t mangle -N tun2socks');
-    S.Add('#Отправляем в неё всё, кроме DNS из $lan в прокси/tun2socks');
+    S.Add('#Отправляем в неё из $lan всё, кроме DNS/DHCP/SSH/VNC и в tun2socks');
     S.Add('#iptables -t mangle -I PREROUTING -i $lan -j MARK --set-mark 3');
-    S.Add('iptables -t mangle -I PREROUTING -i $lan -p udp -m multiport ! --dport 22,53,5900 -j MARK --set-mark 3');
-    S.Add('iptables -t mangle -I PREROUTING -i $lan -p tcp -m multiport ! --dport 22,53,5900 -j MARK --set-mark 3');
+    S.Add('iptables -t mangle -I PREROUTING -i $lan -p udp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
+    S.Add('iptables -t mangle -I PREROUTING -i $lan -p tcp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
     S.Add('');
     S.Add('#Отправляем https трафик в прокси');
     S.Add('#iptables -t mangle -A OUTPUT -p tcp --dport 80 -j MARK --set-mark 3');
@@ -170,12 +170,14 @@ begin
     S.Add('#Создаём таблицу маршрутизации');
     S.Add('ip route add default dev tun2socks table 300');
     S.Add('ip rule add fwmark 3 lookup 300');
-    S.Add('  else');
+{    S.Add('  else');
     S.Add('#Очищаем таблицу с дефолтным маршрутом');
     S.Add('ip rule del fwmark 3 lookup 300 &> /dev/null');
     S.Add('#Удаляем интерфейс SOCKS5');
     S.Add('ip link delete dev tun2socks &> /dev/null');
-    S.Add('fi');
+    S.Add('#Отключаем шифрование DNS');
+    S.Add('sed -i "s/^server=.*/server=8.8.8.8/g" /etc/dnsmasq.conf');
+    S.Add('fi'); }
 
     S.SaveToFile('/etc/socksgw/tun2socks.sh');
     RunCommand('/bin/bash', ['-c', 'chmod +x /etc/socksgw/tun2socks.sh'], k);
@@ -189,8 +191,12 @@ begin
     S.Add('#Слушать на интерфейсах lan+lo');
     S.Add('interface=' + LAN.Text);
     S.Add('listen-address=127.0.0.1,' + LAN_IP.Text);
-    S.Add('#Привязать интерфейс, другим не отвечать');
-    S.Add('bind-interfaces');
+    S.Add('');
+    S.Add('#Привязать интерфейс (динамически, ждать интерфейс), другим не отвечать');
+    S.Add('#bind-interfaces');
+    S.Add('no-dhcp-interface=' + WAN.Text);
+    S.Add('except-interface=' + WAN.Text);
+    S.Add('bind-dynamic');
     S.Add('');
     S.Add('#Не использовать /etc/resolv.conf');
     S.Add('no-resolv');
@@ -234,6 +240,7 @@ begin
     //SSH: LAN_IP:22
     S.Clear;
     S.Add('Include /etc/ssh/sshd_config.d/*.conf');
+    S.Add('ListenAddress 127.0.0.1');
     S.Add('ListenAddress ' + LAN_IP.Text);
     S.Add('#ListenAddress ::');
     S.Add('AuthorizedKeysFile	.ssh/authorized_keys');
@@ -246,7 +253,8 @@ begin
     RunCommand('/bin/bash', ['-c', 'echo "' + VNCPassEdit.Text +
       '"> /etc/socksgw/x11vnc.pass; [[ -d /etc/lightdm ]] && ' +
       'sed -i "s/^autologin-user.*/autologin-user=$(cat /tmp/socksgw-user)/g" /etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf; '
-      + 'systemctl enable dnsmasq tun2socks x11vnc sshd; systemctl restart dnsmasq tun2socks x11vnc sshd'], k);
+      + 'systemctl enable tun2socks dnsmasq x11vnc sshd; systemctl restart dnsmasq tun2socks x11vnc sshd'], k);
+
   finally
     MainForm.Caption := Application.Title;
     S.Free;
@@ -320,11 +328,73 @@ end;
 procedure TMainForm.StopBtnClick(Sender: TObject);
 var
   k: ansistring;
+  S: TStringList;
 begin
-  Application.ProcessMessages;
-  RunCommand('/bin/bash', ['-c',
-    'systemctl disable tun2socks; systemctl stop tun2socks'], k);
-end;
+  try
+    //Прогресс
+    MainForm.Caption := Application.Title + ' [...stopping]';
 
+    //Создаём пускач /etc/socksgw/socksgw.sh
+    S := TStringList.Create;
+
+    S.Add('#!/bin/bash');
+    S.Add('');
+    S.Add('#Интерфейсы; tun2socks - gw');
+    S.Add('wan=' + WAN.Text);
+    S.Add('lan=' + LAN.Text);
+    S.Add('#-----------------//----------------');
+    S.Add('');
+    S.Add('#Протокол IPv6 On/Off');
+    if IPV6.Checked then
+    begin
+      S.Add('sysctl -w net.ipv6.conf.all.disable_ipv6=0');
+      S.Add('sysctl -w net.ipv6.conf.default.disable_ipv6=0');
+      S.Add('sysctl -w net.ipv6.conf.lo.disable_ipv6=0');
+    end
+    else
+    begin
+      S.Add('sysctl -w net.ipv6.conf.all.disable_ipv6=1');
+      S.Add('sysctl -w net.ipv6.conf.default.disable_ipv6=1');
+      S.Add('sysctl -w net.ipv6.conf.lo.disable_ipv6=1');
+    end;
+    S.Add('');
+    S.Add('#Включаем форвардинг пакетов IPv4');
+    S.Add('sysctl -w net.ipv4.ip_forward=1');
+    S.Add('sysctl -w net.ipv4.conf.all.rp_filter=1');
+    S.Add('');
+    S.Add('#Очистка iptables');
+    S.Add('iptables -F; iptables -X');
+    S.Add('iptables -t nat -F; iptables -t nat -X');
+    S.Add('iptables -t mangle -F; iptables -t mangle -X');
+    S.Add('');
+    S.Add('#Очищаем таблицу с дефолтным маршрутом для tun2socks');
+    S.Add('ip rule del fwmark 3 lookup 300 &> /dev/null');
+    S.Add('#Удаляем интерфейс tun2socks');
+    S.Add('ip link delete dev tun2socks &> /dev/null');
+    S.Add('');
+    S.Add('#Всё в ACCEPT');
+    S.Add('iptables -P INPUT ACCEPT; iptables -P OUTPUT ACCEPT; iptables -P FORWARD ACCEPT');
+    S.Add('');
+    S.Add('#Разрешаем lo и уже установленные соединения');
+    S.Add('iptables -A INPUT -i lo -j ACCEPT');
+    S.Add('iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT');
+    S.Add('');
+    S.Add('#Секция маскардинга');
+    S.Add('iptables -A FORWARD -i $wan -o $lan -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT');
+    S.Add('iptables -A FORWARD -i $lan -o $wan -j ACCEPT');
+    S.Add('iptables -t nat -A POSTROUTING -o $wan -j MASQUERADE');
+
+    S.SaveToFile('/etc/socksgw/tun2socks.sh');
+
+    //Отключаем шифрование DNS и пересылку в tun2socks
+    Application.ProcessMessages;
+    RunCommand('/bin/bash', ['-c',
+      'sed -i "s/^server=.*/server=8.8.8.8/g" /etc/dnsmasq.conf; ' +
+      'chmod +x /etc/socksgw/tun2socks.sh; systemctl restart dnsmasq tun2socks'], k);
+  finally
+    MainForm.Caption := Application.Title;
+    S.Free;
+  end;
+end;
 
 end.

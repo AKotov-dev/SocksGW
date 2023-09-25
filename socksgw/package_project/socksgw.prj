@@ -2,7 +2,7 @@
 name=socksgw
 
 [VERSION]
-version=0.4
+version=0.5
 
 [RELEASE]
 release=0.mrx9
@@ -79,18 +79,24 @@ devtool=Lazarus
 toolversion=2.2.4
 
 [INFO]
-0=v0.4
-1=+ Autologin when starting SocksGW
-2=+ RPM packages for MgaRemix/Mageia (9)
-3=
-4=v0.3
-5=+ SSH - LAN_IP:22
-6=+ Disabling screensaver and sleep mode
-7=+ RPM packages for MgaRemix/Mageia (9)
-8=
-9=v0.2
-10=+ Access from LAN via VNC, port 5900, default password `socksgw`
-11=+ RPM packages for MgaRemix/Mageia (9)
-12=
-13=v0.1
-14=-Initial release
+0=v0.5
+1=+ Switch to Network Manager
+2=+ End-to-end channel when encryption is disabled
+3=+ Improved configurations and launch services
+4=+ RPM packages for MgaRemix/Mageia (9)
+5=
+6=v0.4
+7=+ Autologin when starting SocksGW
+8=+ RPM packages for MgaRemix/Mageia (9)
+9=
+10=v0.3
+11=+ SSH - LAN_IP:22
+12=+ Disabling screensaver and sleep mode
+13=+ RPM packages for MgaRemix/Mageia (9)
+14=
+15=v0.2
+16=+ Access from LAN via VNC, port 5900, default password `socksgw`
+17=+ RPM packages for MgaRemix/Mageia (9)
+18=
+19=v0.1
+20=-Initial release

@@ -18,8 +18,8 @@ uses
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title := 'SocksGW v0.4';
-  Application.Scaled := True;
+  Application.Title:='SocksGW v0.5';
+  Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
   Application.Run;
