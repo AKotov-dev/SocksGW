@@ -385,14 +385,14 @@ begin
     S.Add('iptables -t nat -A POSTROUTING -o $wan -j MASQUERADE');
     S.Add('');
     S.Add('Отключаем шифрование DNS и пересылку в tun2socks');
-    S.Add('sed -i "s/^server=.*/server=8.8.8.8/g" /etc/dnsmasq.conf');
+    S.Add('sed -i "s/^server=.*/server=149.112.112.112/g" /etc/dnsmasq.conf');
+    S.Add('systemctl restart dnsmasq');
 
     S.SaveToFile('/etc/socksgw/tun2socks.sh');
 
     //Отключаем шифрование DNS и пересылку в tun2socks
     Application.ProcessMessages;
-    RunCommand('/bin/bash', ['-c', 'chmod +x /etc/socksgw/tun2socks.sh; ' +
-      'systemctl stop tun2socks; systemctl start tun2socks; systemctl stop dnsmasq; systemctl start dnsmasq'], k);
+    RunCommand('/bin/bash', ['-c', 'chmod +x /etc/socksgw/tun2socks.sh; systemctl restart tun2socks'], k);
   finally
     MainForm.Caption := Application.Title;
     S.Free;
