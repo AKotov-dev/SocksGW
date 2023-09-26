@@ -18,7 +18,7 @@ uses
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title:='SocksGW v0.5';
+  Application.Title:='SocksGW v0.6';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);

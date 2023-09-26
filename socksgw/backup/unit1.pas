@@ -248,7 +248,7 @@ begin
     S.Add('');
     S.SaveToFile('/etc/ssh/sshd_config');
 
-    //Старт dnamsq/tun2socks/x11vnc/sshd + autologin
+    //Старт dnsmasq/tun2socks/x11vnc/sshd + autologin
     Application.ProcessMessages;
     RunCommand('/bin/bash', ['-c', 'echo "' + VNCPassEdit.Text +
       '"> /etc/socksgw/x11vnc.pass; [[ -d /etc/lightdm ]] && ' +
@@ -392,7 +392,8 @@ begin
 
     //Отключаем шифрование DNS и пересылку в tun2socks
     Application.ProcessMessages;
-    RunCommand('/bin/bash', ['-c', 'chmod +x /etc/socksgw/tun2socks.sh; systemctl restart tun2socks'], k);
+    RunCommand('/bin/bash', ['-c',
+      'chmod +x /etc/socksgw/tun2socks.sh; systemctl restart tun2socks'], k);
   finally
     MainForm.Caption := Application.Title;
     S.Free;
