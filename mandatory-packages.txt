@@ -9,8 +9,4 @@ Other:
 ---
 urpmi --auto firefox mc htop draklive-install grub2-efi pluma drakclock-patch pchanger scleaner dnscrypt-gui xraygui socksgw initrd-builder nm-lite
 
-Disabling unnecessary services:
----
-systemctl disable mdadm.service; systemctl disable mdmonitor.service; systemctl disable mdmonitor-takeover.service
-
 
