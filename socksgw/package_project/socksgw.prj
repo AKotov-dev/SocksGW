@@ -51,9 +51,9 @@ deb=0
 5=/usr/share/polkit-1/actions/socksgw.policy
 6=/etc/systemd/system/tun2socks.service
 7=/etc/systemd/system/tun2socks-update.service
-8=/usr/share/socksgw/
-9=/usr/share/doc/socksgw/
-10=/etc/systemd/system/sshd.service.d/
+8=/etc/systemd/system/sshd.service.d/wait.conf
+9=/usr/share/socksgw/
+10=/usr/share/doc/socksgw/
 
 [AFTERINSTALL]
 0=#!/bin/bash
