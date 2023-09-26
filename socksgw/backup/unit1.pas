@@ -314,7 +314,7 @@ begin
   FUpdateThread.Priority := tpNormal;
 end;
 
-//Список интерфейсов
+//Список интерфейсов -> LAN_IP
 procedure TMainForm.LANChange(Sender: TObject);
 var
   s: ansistring;
