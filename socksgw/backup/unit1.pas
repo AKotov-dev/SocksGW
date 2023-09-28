@@ -45,7 +45,7 @@ var
   MainForm: TMainForm;
 
 
-  resourcestring
+resourcestring
   SWorkingMsg = '[...working]';
   SStoppingMsg = '[...stopping]';
 
