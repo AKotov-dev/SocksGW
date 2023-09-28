@@ -33,7 +33,7 @@ msgstr ""
 msgid ""
 "Before setting up SocksGW, do the following:\n"
 "  \n"
-"1. Configure WAN and LAN network cards via Control Center:\n"
+"1. Configure WAN and LAN network cards via Network Manager:\n"
 "-WAN to the provider, LAN to the local network\n"
 " \n"
 "2. Check your Internet access, for example: ping kernel.org\n"
@@ -64,5 +64,13 @@ msgctxt "tmainform.vncpassedit.hint"
 msgid ""
 "LAN_IP:5900\n"
 "Default password: socksgw"
+msgstr ""
+
+#: unit1.sstoppingmsg
+msgid "[...stopping]"
+msgstr ""
+
+#: unit1.sworkingmsg
+msgid "[...working]"
 msgstr ""
 

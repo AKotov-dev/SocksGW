@@ -44,6 +44,11 @@ type
 var
   MainForm: TMainForm;
 
+
+  resourcestring
+  SWorkingMsg = '[...working]';
+  SStoppingMsg = '[...stopping]';
+
 implementation
 
 uses update_trd, portscan_trd;
@@ -91,7 +96,7 @@ var
 begin
   try
     //Прогресс
-    MainForm.Caption := Application.Title + ' [...starting]';
+    MainForm.Caption := Application.Title + ' ' + SWorkingMsg;
 
     //Создаём пускач /etc/socksgw/socksgw.sh
     S := TStringList.Create;
@@ -332,7 +337,7 @@ var
 begin
   try
     //Прогресс
-    MainForm.Caption := Application.Title + ' [...stopping]';
+    MainForm.Caption := Application.Title + ' ' + SStoppingMsg;
 
     //Создаём пускач /etc/socksgw/socksgw.sh
     S := TStringList.Create;
