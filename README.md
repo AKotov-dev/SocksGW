@@ -4,6 +4,7 @@ SocksGW - это инструмент, позволяющий превратит
 ![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/SocksGW.png)
   
 Готовая сборка (флешка-шлюз) для установки на будущий роутер [находится здесь](https://drive.google.com/drive/folders/1DVoUumM_CQ10da0Vqtu98uvrMbBk9DmM?usp=sharing) (RU/EN).  
+  
 После загрузки с флешки запустите ярлык на Рабочем Столе `Установить на жесткий диск`. После установки/перезагрузки пароль по умолчанию `ghbdtn` (слово `привет` в английской раскладке).
 
 Вы можете настроить шлюз самостоятельно, с нуля. Для этого установите пакеты [dnscrypt-gui](https://github.com/AKotov-dev/dnscrypt-gui/releases), [xraygui](https://github.com/AKotov-dev/XRayGUI/releases) и [socksgw](https://github.com/AKotov-dev/SocksGW/releases). Обсуждение [здесь](https://linuxforum.ru/viewtopic.php?pid=471777#p471777).
