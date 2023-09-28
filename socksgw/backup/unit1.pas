@@ -384,8 +384,8 @@ begin
     S.Add('iptables -A FORWARD -i $lan -o $wan -j ACCEPT');
     S.Add('iptables -t nat -A POSTROUTING -o $wan -j MASQUERADE');
     S.Add('');
-    S.Add('Отключаем шифрование DNS и пересылку в tun2socks');
-    S.Add('sed -i "s/^server=.*/server=149.112.112.112/g" /etc/dnsmasq.conf');
+    S.Add('Отключаем шифрование DNS и пересылку в tun2socks, используем надёжные DNS');
+    S.Add('sed -i "/server=/d" /etc/dnsmasq.conf; echo -e "\nserver=9.9.9.9\nserver=149.112.112.112" >> /etc/dnsmasq.conf');
     S.Add('systemctl restart dnsmasq');
 
     S.SaveToFile('/etc/socksgw/tun2socks.sh');
