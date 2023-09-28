@@ -20,7 +20,7 @@ SocksGW - это инструмент, позволяющий превратит
  
 После этого введите настройки SocksGW и нажмите `APPLY`  
   
-![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/Screenshot5.png)  
+![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/Screenshot1.png)  
   
 Перезагрузите компьютер клиента, чтобы он принял новые настройки шлюза.  
   
