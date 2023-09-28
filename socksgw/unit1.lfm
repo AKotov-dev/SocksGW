@@ -76,7 +76,7 @@ object MainForm: TMainForm
     Height = 238
     Top = 8
     Width = 408
-    Caption = 'Before setting up SocksGW, do the following:'#10'  '#10'1. Configure WAN and LAN network cards via Control Center:'#10'-WAN to the provider, LAN to the local network'#10' '#10'2. Check Internet access'#10' '#10'3. Launch DNSCrypt-GUI, specify port "2053" and "Restart"'#10'-127.0.0.1:2053'#10' '#10'4. Launch XRayGUI, load your VPS configuration and "Start"'#10'-127.0.0.1:1080'#10' '#10'After that, enter the details below and click the "APPLY" button'
+    Caption = 'Before setting up SocksGW, do the following:'#10'  '#10'1. Configure WAN and LAN network cards via Control Center:'#10'-WAN to the provider, LAN to the local network'#10' '#10'2. Check your Internet access, for example: ping kernel.org'#10' '#10'3. Launch DNSCrypt-GUI, specify port "2053" and "Restart"'#10'-127.0.0.1:2053'#10' '#10'4. Launch XRayGUI, load your VPS configuration and "Start"'#10'-127.0.0.1:1080'#10' '#10'After that, enter the details below and click the "APPLY" button'
     Font.Height = -13
     Font.Name = 'Sans'
     Font.Style = [fsItalic]
@@ -117,7 +117,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 486
     Height = 32
-    Top = 138
+    Top = 139
     Width = 114
     Caption = 'IPv6 (On/Off)'
     TabOrder = 0
@@ -216,7 +216,7 @@ object MainForm: TMainForm
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
-    Left = 408
-    Top = 32
+    Left = 416
+    Top = 40
   end
 end
