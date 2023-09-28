@@ -1,7 +1,7 @@
 # SocksGW
 SocksGW - это инструмент, позволяющий превратить обычный компьютер с двумя сетевыми картами в интернет-шлюз Socks5. Он является связующим звеном между [XRayGUI](https://github.com/AKotov-dev/XRayGUI) и [DNSCrypt-GUI](https://github.com/AKotov-dev/dnscrypt-gui). Таким образом шлюз состоит из 3 основных пакетов. Удобнее ставить его в разрыв между существующим роутером и LAN.
   
-![](https://github.com/AKotov-dev/SocksGW/blob/main/SocksGW.png)
+![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/SocksGW.png)
   
 Готовая сборка (флешка-шлюз) для установки на будущий роутер [находится здесь](https://drive.google.com/drive/folders/1DVoUumM_CQ10da0Vqtu98uvrMbBk9DmM?usp=sharing) (RU/EN).  
 После загрузки с флешки запустите ярлык на Рабочем Столе `Установить на жесткий диск`. После установки/перезагрузки пароль по умолчанию `ghbdtn` (слово `привет` в английской раскладке).
@@ -20,10 +20,12 @@ SocksGW - это инструмент, позволяющий превратит
  
 После этого введите настройки SocksGW и нажмите `APPLY`  
   
-![](https://github.com/AKotov-dev/SocksGW/blob/main/Screenshot5.png)  
+![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/Screenshot5.png)  
   
-Перезагрузите компьютер клиента, чтобы он принял новые настройки шлюза.
-
+Перезагрузите компьютер клиента, чтобы он принял новые настройки шлюза.  
+  
+![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/SocksGW-Control.png)  
+  
 **UPD-v0.2:** Доступ из LAN по VNC:5900, пароль по умолчанию - `socksgw`. Подключение через [TigerVNC](https://sourceforge.net/projects/tigervnc/).  
 Если планируется использование SocksGW на компе без монитора, для доступа по VNC без тормозов потребуется [заглушка](https://www.youtube.com/results?search_query=%D1%8D%D0%BC%D1%83%D0%BB%D1%8F%D1%82%D0%BE%D1%80+%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80%D0%B0).  
   
