@@ -37,13 +37,13 @@ SocksGW - это инструмент, позволяющий превратит
   
 **UPD-v0.7:** Релиз в реальной эксплуатации. Полёт нормальный.
   
-#### Структурная схема:
+### Структурная схема:
 LAN->DNS->DNSMASQ->DNSCrypt-Proxy->WAN  
 LAN->Остальное->IPTABLES+ROUTE->Tun2Socks+Xray->WAN
 
 Всем безопасного вэб-серфинга, друзья.
 
-#### Использованы материалы:
+### Использованы материалы:
 [XRay-Core, Project X](https://github.com/XTLS/Xray-core)  
 [tun2socks - powered by gVisor TCP/IP stack. Author: xjasonlyu](https://github.com/xjasonlyu/tun2socks)  
 [Wi-Fi через прокси без шума и пыли (почти). Автор: alevor](https://habr.com/ru/articles/697916/)  
