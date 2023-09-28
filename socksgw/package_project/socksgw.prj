@@ -58,14 +58,20 @@ deb=0
 [AFTERINSTALL]
 0=#!/bin/bash
 1=
-2=systemctl daemon-reload
-3=systemctl restart crond
+2=#Установка или апгрейд
+3=if [ $1 -ge 1 ]; then
+4=systemctl daemon-reload
+5=systemctl restart crond
+6=fi;
 
 [AFTERREMOVE]
 0=#!/bin/bash
 1=
-2=systemctl daemon-reload
-3=systemctl restart crond
+2=#Если удаление
+3=if [ $1 -eq 0 ]; then
+4=systemctl daemon-reload
+5=systemctl restart crond
+6=fi;
 
 [URL32]
 url32=https://github.com/AKotov-dev/SocksGW
