@@ -7,6 +7,6 @@ urpme --auto shorewall-core msec mgaonline mageiawelcome malcontent dasher atril
 
 Other:
 ---
-urpmi --auto firefox mc htop draklive-install grub2-efi pluma drakclock-patch pchanger scleaner dnscrypt-gui xraygui socksgw initrd-builder nm-lite
+urpmi --auto firefox mc htop draklive-install grub2-efi pluma drakclock-patch pchanger scleaner dnscrypt-gui xraygui socksgw initrd-builder filezilla putty (nm-lite for MATE)
 
 
