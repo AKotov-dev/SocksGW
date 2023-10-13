@@ -231,14 +231,18 @@ begin
     S.Clear;
     S.Add('[Unit]');
     S.Add('Description=Start x11vnc at startup');
-    S.Add('After=graphical.target multi-user.target');
+    S.Add('After=display-manager.service graphical.target multi-user.target');
     S.Add('');
     S.Add('[Service]');
     S.Add('Type=simple');
-    S.Add('ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -passwdfile /etc/socksgw/x11vnc.pass -rfbport 5900 -shared -listen ' + LAN_IP.Text);
+    S.Add('ExecStart=/bin/bash -c ' + '''' +
+      '/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -passwdfile /etc/socksgw/x11vnc.pass -rfbport 5900 -shared -listen '
+      + LAN_IP.Text + '''');
+    S.Add('Restart=on-failure');
+    S.Add('RestartSec=5');
     S.Add('');
     S.Add('[Install]');
-    S.Add('WantedBy=multi-user.target');
+    S.Add('WantedBy=graphical.target multi-user.target');
 
     S.SaveToFile('/etc/systemd/system/x11vnc.service');
 
@@ -258,7 +262,7 @@ begin
     RunCommand('/bin/bash', ['-c', 'echo "' + VNCPassEdit.Text +
       '"> /etc/socksgw/x11vnc.pass; [[ -d /etc/lightdm ]] && ' +
       'sed -i "s/^autologin-user.*/autologin-user=$(cat /tmp/socksgw-user)/g" /etc/lightdm/lightdm.conf.d/50-mageia-autologin.conf; '
-      + 'systemctl enable tun2socks dnsmasq x11vnc sshd; systemctl restart dnsmasq tun2socks x11vnc sshd'], k);
+      + 'systemctl daemon-reload; systemctl enable tun2socks dnsmasq x11vnc sshd; systemctl restart dnsmasq tun2socks x11vnc sshd'], k);
 
   finally
     MainForm.Caption := Application.Title;
