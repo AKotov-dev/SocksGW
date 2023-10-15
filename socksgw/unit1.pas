@@ -34,7 +34,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LANChange(Sender: TObject);
+    procedure LANCloseUp(Sender: TObject);
     procedure StopBtnClick(Sender: TObject);
+    procedure GetIFList;
+    procedure WANCloseUp(Sender: TObject);
   private
 
   public
@@ -57,18 +60,18 @@ uses update_trd, portscan_trd;
 
 { TMainForm }
 
-procedure TMainForm.FormCreate(Sender: TObject);
+//Получаем список интерфейсов
+procedure TMainForm.GetIFList;
 var
   i: integer;
   s: ansistring;
   SL: TStringList;
 begin
   try
-    SL := TStringList.Create;
+    WAN.Items.Clear;
+    LAN.Items.Clear;
 
-    MainForm.Caption := Application.Title;
-    if not DirectoryExists('/etc/socksgw') then MkDir('/etc/socksgw');
-    IniPropStorage1.IniFileName := '/etc/socksgw/socksgw.ini';
+    SL := TStringList.Create;
 
     //Список интерфейсов
     RunCommand('/bin/bash', ['-c',
@@ -86,6 +89,22 @@ begin
   finally
     SL.Free;
   end;
+end;
+
+procedure TMainForm.WANCloseUp(Sender: TObject);
+begin
+    //Получаем список интерфейсов
+  GetIfList;
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+  MainForm.Caption := Application.Title;
+  if not DirectoryExists('/etc/socksgw') then MkDir('/etc/socksgw');
+  IniPropStorage1.IniFileName := '/etc/socksgw/socksgw.ini';
+
+  //Получаем список интерфейсов
+  GetIFList;
 end;
 
 //Apply
@@ -331,6 +350,12 @@ begin
   RunCommand('/bin/bash', ['-c', 'ip -br a | grep ' + LAN.Text +
     ' | awk ' + '''' + '{print $3}' + '''' + '| cut -f1 -d"/"'], s);
   LAN_IP.Text := Trim(S);
+end;
+
+procedure TMainForm.LANCloseUp(Sender: TObject);
+begin
+    //Получаем список интерфейсов
+  GetIfList;
 end;
 
 //Stop tun2socks GW

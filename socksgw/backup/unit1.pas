@@ -34,7 +34,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LANChange(Sender: TObject);
+    procedure LANCloseUp(Sender: TObject);
     procedure StopBtnClick(Sender: TObject);
+    procedure GetIFList;
+    procedure WANCloseUp(Sender: TObject);
   private
 
   public
@@ -57,7 +60,8 @@ uses update_trd, portscan_trd;
 
 { TMainForm }
 
-procedure TMainForm.FormCreate(Sender: TObject);
+//Получаем список интерфейсов
+procedure TMainForm.GetIFList;
 var
   i: integer;
   s: ansistring;
@@ -65,10 +69,6 @@ var
 begin
   try
     SL := TStringList.Create;
-
-    MainForm.Caption := Application.Title;
-    if not DirectoryExists('/etc/socksgw') then MkDir('/etc/socksgw');
-    IniPropStorage1.IniFileName := '/etc/socksgw/socksgw.ini';
 
     //Список интерфейсов
     RunCommand('/bin/bash', ['-c',
@@ -86,6 +86,22 @@ begin
   finally
     SL.Free;
   end;
+end;
+
+procedure TMainForm.WANCloseUp(Sender: TObject);
+begin
+    //Получаем список интерфейсов
+  GetIfList;
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+  MainForm.Caption := Application.Title;
+  if not DirectoryExists('/etc/socksgw') then MkDir('/etc/socksgw');
+  IniPropStorage1.IniFileName := '/etc/socksgw/socksgw.ini';
+
+  //Получаем список интерфейсов
+  GetIFList;
 end;
 
 //Apply
@@ -333,6 +349,12 @@ begin
   LAN_IP.Text := Trim(S);
 end;
 
+procedure TMainForm.LANCloseUp(Sender: TObject);
+begin
+    //Получаем список интерфейсов
+  GetIfList;
+end;
+
 //Stop tun2socks GW
 procedure TMainForm.StopBtnClick(Sender: TObject);
 var
@@ -393,7 +415,7 @@ begin
     S.Add('iptables -A FORWARD -i $lan -o $wan -j ACCEPT');
     S.Add('iptables -t nat -A POSTROUTING -o $wan -j MASQUERADE');
     S.Add('');
-    S.Add('Отключаем шифрование DNS и пересылку в tun2socks, используем надёжные DNS');
+    S.Add('#Отключаем шифрование DNS и пересылку в tun2socks, используем надёжные DNS');
     S.Add('sed -i "/^server=/d" /etc/dnsmasq.conf; echo -e "\nserver=9.9.9.9\nserver=149.112.112.112" >> /etc/dnsmasq.conf');
     S.Add('systemctl restart dnsmasq');
 

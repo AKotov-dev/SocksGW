@@ -155,6 +155,7 @@ object MainForm: TMainForm
     Width = 150
     BorderSpacing.Left = 5
     ItemHeight = 0
+    OnCloseUp = WANCloseUp
     TabOrder = 2
   end
   object LAN: TComboBox
@@ -169,6 +170,7 @@ object MainForm: TMainForm
     BorderSpacing.Left = 5
     ItemHeight = 0
     OnChange = LANChange
+    OnCloseUp = LANCloseUp
     TabOrder = 3
   end
   object StaticText1: TStaticText
