@@ -120,6 +120,7 @@ object MainForm: TMainForm
     Top = 139
     Width = 114
     Caption = 'IPv6 (On/Off)'
+    Enabled = False
     TabOrder = 0
   end
   object StopBtn: TSpeedButton

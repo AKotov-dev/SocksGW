@@ -327,6 +327,7 @@ procedure TMainForm.LANChange(Sender: TObject);
 var
   s: ansistring;
 begin
+  LAN_IP.Clear;
   RunCommand('/bin/bash', ['-c', 'ip -br a | grep ' + LAN.Text +
     ' | awk ' + '''' + '{print $3}' + '''' + '| cut -f1 -d"/"'], s);
   LAN_IP.Text := Trim(S);
@@ -392,7 +393,7 @@ begin
     S.Add('iptables -A FORWARD -i $lan -o $wan -j ACCEPT');
     S.Add('iptables -t nat -A POSTROUTING -o $wan -j MASQUERADE');
     S.Add('');
-    S.Add('Отключаем шифрование DNS и пересылку в tun2socks, используем надёжные DNS');
+    S.Add('#Отключаем шифрование DNS и пересылку в tun2socks, используем надёжные DNS');
     S.Add('sed -i "/^server=/d" /etc/dnsmasq.conf; echo -e "\nserver=9.9.9.9\nserver=149.112.112.112" >> /etc/dnsmasq.conf');
     S.Add('systemctl restart dnsmasq');
 

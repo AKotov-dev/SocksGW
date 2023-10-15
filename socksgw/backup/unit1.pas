@@ -235,9 +235,8 @@ begin
     S.Add('');
     S.Add('[Service]');
     S.Add('Type=simple');
-    S.Add('ExecStart=/bin/bash -c ' + '''' +
-      '/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -passwdfile /etc/socksgw/x11vnc.pass -rfbport 5900 -shared -listen '
-      + LAN_IP.Text + '''');
+    S.Add('ExecStart=/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -passwdfile '
+      + '/etc/socksgw/x11vnc.pass -rfbport 5900 -shared -listen ' + LAN_IP.Text);
     S.Add('Restart=on-failure');
     S.Add('RestartSec=5');
     S.Add('');
@@ -328,6 +327,7 @@ procedure TMainForm.LANChange(Sender: TObject);
 var
   s: ansistring;
 begin
+  LAN_IP.Clear;
   RunCommand('/bin/bash', ['-c', 'ip -br a | grep ' + LAN.Text +
     ' | awk ' + '''' + '{print $3}' + '''' + '| cut -f1 -d"/"'], s);
   LAN_IP.Text := Trim(S);
