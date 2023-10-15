@@ -117,7 +117,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 486
     Height = 32
-    Top = 131
+    Top = 133
     Width = 114
     Caption = 'IPv6 (On/Off)'
     Enabled = False
