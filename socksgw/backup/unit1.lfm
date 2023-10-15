@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 293
+  Left = 291
   Height = 433
-  Top = 125
+  Top = 126
   Width = 645
   Caption = 'SocksGW'
   ClientHeight = 433
@@ -64,7 +64,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     Left = 486
     Height = 48
-    Top = 24
+    Top = 23
     Width = 152
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 7
@@ -140,7 +140,7 @@ object MainForm: TMainForm
     AnchorSideLeft.Side = asrCenter
     Left = 550
     Height = 10
-    Top = 10
+    Top = 8
     Width = 25
     Brush.Color = clYellow
   end

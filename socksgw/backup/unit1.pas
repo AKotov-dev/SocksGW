@@ -207,6 +207,7 @@ begin
     S.Add('#Создаём таблицу маршрутизации');
     S.Add('ip route add default dev tun2socks table 300');
     S.Add('ip rule add fwmark 3 lookup 300');
+
 {    S.Add('  else');
     S.Add('#Очищаем таблицу с дефолтным маршрутом');
     S.Add('ip rule del fwmark 3 lookup 300 &> /dev/null');
@@ -218,6 +219,25 @@ begin
 
     S.SaveToFile('/etc/socksgw/tun2socks.sh');
     RunCommand('/bin/bash', ['-c', 'chmod +x /etc/socksgw/tun2socks.sh'], k);
+
+    // /etc/NetworkManager/NetworkManager.conf
+    S.Clear;
+
+    S.Add('[main]');
+    S.Add('plugins=ifcfg-rh,keyfile');
+    S.Add('dhcp=internal');
+    S.Add('');
+    S.Add('[ifupdown]');
+    S.Add('managed=false');
+    S.Add('');
+    S.Add('[connection]');
+    S.Add('wifi.powersave=0');
+    S.Add('');
+    S.Add('[device]');
+    S.Add('wifi.backend=wpa_supplicant');
+    S.Add('');
+
+    S.SaveToFile('/etc/NetworkManager/NetworkManager.conf');
 
     // /etc/dnsmasq.conf
     S.Clear;
