@@ -93,7 +93,7 @@ end;
 
 procedure TMainForm.WANCloseUp(Sender: TObject);
 begin
-    //Получаем список интерфейсов
+  //Получаем список интерфейсов
   GetIfList;
 end;
 
@@ -186,6 +186,19 @@ begin
     S.Add('#iptables -t mangle -I PREROUTING -i $lan -j MARK --set-mark 3');
     S.Add('iptables -t mangle -I PREROUTING -i $lan -p udp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
     S.Add('iptables -t mangle -I PREROUTING -i $lan -p tcp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
+
+    //Если активен WiFi, и не выбран в LAN и WAN - отмечаем и тоже заворачиваем
+    if RunCommand('/bin/bash', ['-c', 'nmcli con show --active | grep wifi | awk ' +
+      '''' + '{print $NF}' + ''''], k) then
+      if (Trim(k) <> '') and (Trim(k) <> LAN.Text) and (Trim(k) <> WAN.Text) then
+      begin
+        S.Add('#+WiFi');
+        S.Add('iptables -t mangle -I PREROUTING -i ' + Trim(k) +
+          ' -p udp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
+        S.Add('iptables -t mangle -I PREROUTING -i ' + Trim(k) +
+          ' -p tcp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
+      end;
+
     S.Add('');
     S.Add('#Отправляем https трафик в прокси');
     S.Add('#iptables -t mangle -A OUTPUT -p tcp --dport 80 -j MARK --set-mark 3');
@@ -324,9 +337,7 @@ begin
   if RunCommand('/bin/bash', ['-c',
     'grep "net.ipv6.conf.all" /etc/socksgw/tun2socks.sh | cut -f2 -d"="'], S) then
     if Trim(S) = '0' then
-      IPV6.Checked := True
-    else
-      IPV6.Checked := False;
+      IPV6.Checked := True;
 
   //VNC_PASSWORD
   if RunCommand('/bin/bash', ['-c', 'cat /etc/socksgw/x11vnc.pass'], S) then
@@ -354,7 +365,7 @@ end;
 
 procedure TMainForm.LANCloseUp(Sender: TObject);
 begin
-    //Получаем список интерфейсов
+  //Получаем список интерфейсов
   GetIfList;
 end;
 
