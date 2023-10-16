@@ -26,11 +26,11 @@ SocksGW - это инструмент, позволяющий превратит
  
 После этого введите настройки SocksGW и нажмите `APPLY`  
   
-![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/ScreenShot2.png)  
+![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/ScreenShot11.png)  
   
 Перезагрузите компьютер клиента, чтобы он принял новые настройки шлюза.  
   
-![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/SocksGW-Control.png)  
+![](https://github.com/AKotov-dev/SocksGW/blob/main/ScreenShots/ScreenShot12.png)  
   
 **UPD-v0.2:** Доступ из LAN по VNC:5900, пароль по умолчанию - `socksgw`. Подключение через [TigerVNC](https://sourceforge.net/projects/tigervnc/).  
 Если планируется использование SocksGW на компе без монитора, для доступа по VNC без тормозов потребуется [заглушка](https://www.youtube.com/results?search_query=%D1%8D%D0%BC%D1%83%D0%BB%D1%8F%D1%82%D0%BE%D1%80+%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80%D0%B0).  
