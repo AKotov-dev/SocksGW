@@ -73,8 +73,8 @@ msgstr ""
 "После этого введите настройки ниже и нажмите \"APPLY\""
 
 #: tmainform.label6.caption
-msgid "DHCP (Local IP range. For example: 192.168.1.50,192.168.1.250,72h):"
-msgstr "DHCP (Диапазон локальных IP. Например: 192.168.1.50,192.168.1.250,72h):"
+msgid "DHCP (Local IP range. For example: 10.10.25.50,10.10.25.200):"
+msgstr "DHCP (Диапазон локальных IP. Например: 10.10.25.50,10.10.25.200):"
 
 #: tmainform.statictext1.caption
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
@@ -100,4 +100,3 @@ msgstr "[...останавливаю]"
 #: unit1.sworkingmsg
 msgid "[...working]"
 msgstr "[...работаю]"
-

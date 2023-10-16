@@ -48,7 +48,7 @@ msgid ""
 msgstr ""
 
 #: tmainform.label6.caption
-msgid "DHCP (Local IP range. For example: 192.168.1.50,192.168.1.250,72h):"
+msgid "DHCP (Local IP range. For example: 10.10.25.50,10.10.25.200):"
 msgstr ""
 
 #: tmainform.statictext1.caption

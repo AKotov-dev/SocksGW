@@ -91,10 +91,10 @@ object MainForm: TMainForm
     Left = 7
     Height = 17
     Top = 338
-    Width = 403
+    Width = 365
     BorderSpacing.Top = 20
     BorderSpacing.Bottom = 2
-    Caption = 'DHCP (Local IP range. For example: 192.168.1.50,192.168.1.250,72h):'
+    Caption = 'DHCP (Local IP range. For example: 10.10.25.50,10.10.25.200):'
     ParentColor = False
   end
   object IP_RANGE: TEdit
@@ -117,7 +117,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 486
     Height = 32
-    Top = 133
+    Top = 134
     Width = 114
     Caption = 'IPv6 (On/Off)'
     Enabled = False

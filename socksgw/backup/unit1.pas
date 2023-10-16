@@ -235,7 +235,6 @@ begin
     S.Add('');
     S.Add('[device]');
     S.Add('wifi.backend=wpa_supplicant');
-    S.Add('');
 
     S.SaveToFile('/etc/NetworkManager/NetworkManager.conf');
 
