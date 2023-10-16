@@ -91,10 +91,10 @@ object MainForm: TMainForm
     Left = 7
     Height = 17
     Top = 338
-    Width = 403
+    Width = 365
     BorderSpacing.Top = 20
     BorderSpacing.Bottom = 2
-    Caption = 'DHCP (Local IP range. For example: 192.168.1.50,192.168.1.250,72h):'
+    Caption = 'DHCP (Local IP range. For example: 10.10.25.50,10.10.25.200):'
     ParentColor = False
   end
   object IP_RANGE: TEdit
@@ -117,7 +117,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     Left = 486
     Height = 32
-    Top = 133
+    Top = 134
     Width = 114
     Caption = 'IPv6 (On/Off)'
     Enabled = False
@@ -138,11 +138,16 @@ object MainForm: TMainForm
   object Shape1: TShape
     AnchorSideLeft.Control = ApplyBtn
     AnchorSideLeft.Side = asrCenter
-    Left = 550
-    Height = 10
+    AnchorSideRight.Control = ApplyBtn
+    AnchorSideRight.Side = asrCenter
+    Left = 556
+    Height = 12
     Top = 8
-    Width = 25
+    Width = 12
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 8
     Brush.Color = clYellow
+    Shape = stCircle
   end
   object WAN: TComboBox
     AnchorSideLeft.Control = Label1
@@ -217,9 +222,25 @@ object MainForm: TMainForm
     ShowHint = True
     TabOrder = 1
   end
+  object Shape2: TShape
+    AnchorSideLeft.Control = ApplyBtn
+    AnchorSideTop.Control = Shape1
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = ApplyBtn
+    AnchorSideRight.Side = asrCenter
+    Left = 488
+    Height = 8
+    Hint = 'WiFi (AP)'
+    Top = 10
+    Width = 20
+    BorderSpacing.Left = 2
+    ParentShowHint = False
+    Pen.Color = clGray
+    ShowHint = True
+  end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
     Left = 416
-    Top = 128
+    Top = 120
   end
 end

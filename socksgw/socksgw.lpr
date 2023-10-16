@@ -12,7 +12,7 @@ uses
   Forms,
   Unit1,
   update_trd,
-  portscan_trd;
+  wifi_scan_trd;
 
 {$R *.res}
 

@@ -51,6 +51,10 @@ msgstr ""
 msgid "DHCP (Local IP range. For example: 10.10.25.50,10.10.25.200):"
 msgstr ""
 
+#: tmainform.shape2.hint
+msgid "WiFi (AP)"
+msgstr ""
+
 #: tmainform.statictext1.caption
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
 msgstr ""

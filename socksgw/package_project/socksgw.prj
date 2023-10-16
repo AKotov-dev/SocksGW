@@ -87,7 +87,7 @@ toolversion=2.2.4
 
 [INFO]
 0=v0.9
-1=+ WiFi (AP) support
+1=+ WiFi (AP) support and indicator
 2=+ Improved /etc/NetworkManager/NetworkManager.conf
 3=+ Improved /etc/systemd/system/x11vnc.service
 4=+ RPM packages for MgaRemix/Mageia (9)

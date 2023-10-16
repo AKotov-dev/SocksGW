@@ -13,6 +13,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    Shape2: TShape;
     VNCPassEdit: TEdit;
     Label3: TLabel;
     LAN: TComboBox;
@@ -54,7 +55,7 @@ resourcestring
 
 implementation
 
-uses update_trd, portscan_trd;
+uses update_trd, tun2socks_scan_trd, wifi_scan_trd;
 
 {$R *.lfm}
 
@@ -324,7 +325,8 @@ procedure TMainForm.FormShow(Sender: TObject);
 var
   S: ansistring;
   FUpdateThread: TThread;
-  FPortScanThread: TThread;
+  FWiFiScanThread: TThread;
+  FTun2SocksScanThread: TThread;
 begin
   IniPropStorage1.Restore;
 
@@ -362,9 +364,13 @@ begin
   if RunCommand('/bin/bash', ['-c', 'cat /etc/socksgw/x11vnc.pass'], S) then
     VNCPassEdit.Text := Trim(S);
 
+  //Запуск потока проверки состояния WiFi (AP)
+  FWiFiScanThread := WiFiScan.Create(False);
+  FWiFiScanThread.Priority := tpNormal;
+
   //Запуск потока проверки состояния tun2socks
-  FPortScanThread := PortScan.Create(False);
-  FPortScanThread.Priority := tpNormal;
+  FTun2SocksScanThread := Tun2SocksScan.Create(False);
+  FTun2SocksScanThread.Priority := tpNormal;
 
   //Поток проверки обновлений tun2socks
   FUpdateThread := CheckUpdate.Create(False);

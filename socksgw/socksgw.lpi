@@ -89,7 +89,11 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="portscan_trd.pas"/>
+        <Filename Value="tun2socks_scan_trd.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="wifi_scan_trd.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>

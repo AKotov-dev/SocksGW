@@ -76,6 +76,10 @@ msgstr ""
 msgid "DHCP (Local IP range. For example: 10.10.25.50,10.10.25.200):"
 msgstr "DHCP (Диапазон локальных IP. Например: 10.10.25.50,10.10.25.200):"
 
+#: tmainform.shape2.hint
+msgid "WiFi (AP)"
+msgstr ""
+
 #: tmainform.statictext1.caption
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
@@ -100,3 +104,4 @@ msgstr "[...останавливаю]"
 #: unit1.sworkingmsg
 msgid "[...working]"
 msgstr "[...работаю]"
+
