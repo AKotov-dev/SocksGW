@@ -138,6 +138,7 @@ object MainForm: TMainForm
   object Shape1: TShape
     AnchorSideLeft.Control = ApplyBtn
     AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Label5
     AnchorSideRight.Control = ApplyBtn
     AnchorSideRight.Side = asrCenter
     Left = 556

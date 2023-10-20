@@ -166,8 +166,20 @@ begin
     S.Add('#Секция маскардинга');
     S.Add('iptables -A FORWARD -i $wan -o $lan -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT');
     S.Add('iptables -A FORWARD -i $lan -o $wan -j ACCEPT');
+
+    //Если активен WiFi (AP) и не выбран как LAN или WAN
+    if RunCommand('/bin/bash', ['-c', 'nmcli con show --active | grep wifi | awk ' +
+      '''' + '{print $NF}' + ''''], k) then
+      if (Trim(k) <> '') and (Trim(k) <> LAN.Text) and (Trim(k) <> WAN.Text) then
+      begin
+        S.Add('iptables -A FORWARD -i $wan -o ' + Trim(k) +
+          ' -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT');
+        S.Add('iptables -A FORWARD -i ' + Trim(k) + ' -o $wan -j ACCEPT');
+      end;
+
     S.Add('iptables -t nat -A POSTROUTING -o $wan -j MASQUERADE');
     S.Add('');
+
     //    S.Add('if [ "$1" != "stop" ]; then');
     S.Add('#Создаём интерфейс tun2socks с привязкой к серверу socks5');
     S.Add('tun2socks-linux-amd64 -device tun://tun2socks -proxy socks5://127.0.0.1:1080 &');
@@ -185,31 +197,33 @@ begin
     S.Add('iptables -t mangle -N tun2socks');
     S.Add('#Отправляем в неё из $lan всё, кроме DNS/DHCP/SSH/VNC и в tun2socks');
     S.Add('#iptables -t mangle -I PREROUTING -i $lan -j MARK --set-mark 3');
-    S.Add('iptables -t mangle -I PREROUTING -i $lan -p udp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
-    S.Add('iptables -t mangle -I PREROUTING -i $lan -p tcp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
+    S.Add('iptables -t mangle -I PREROUTING -i $lan -p udp -m multiport ! --dport 22,53,67,68,5900 -j MARK --set-mark 3');
+    S.Add('iptables -t mangle -I PREROUTING -i $lan -p tcp -m multiport ! --dport 22,53,5900 -j MARK --set-mark 3');
 
-    //Если активен WiFi, и не выбран в LAN и WAN - отмечаем и тоже заворачиваем
+    //Если активен WiFi (AP) и не выбран как LAN или WAN - маркируем и тоже заворачиваем
     if RunCommand('/bin/bash', ['-c', 'nmcli con show --active | grep wifi | awk ' +
       '''' + '{print $NF}' + ''''], k) then
       if (Trim(k) <> '') and (Trim(k) <> LAN.Text) and (Trim(k) <> WAN.Text) then
       begin
         S.Add('#+WiFi');
         S.Add('iptables -t mangle -I PREROUTING -i ' + Trim(k) +
-          ' -p udp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
+          ' -p udp -m multiport ! --dport 22,53,67,68,5900 -j MARK --set-mark 3');
         S.Add('iptables -t mangle -I PREROUTING -i ' + Trim(k) +
-          ' -p tcp -m multiport ! --dport 22,53,67,5900 -j MARK --set-mark 3');
+          ' -p tcp -m multiport ! --dport 22,53,5900 -j MARK --set-mark 3');
       end;
 
     S.Add('');
-    S.Add('#Отправляем https трафик в прокси');
+
+    {    S.Add('#Отправляем https трафик в прокси');
     S.Add('#iptables -t mangle -A OUTPUT -p tcp --dport 80 -j MARK --set-mark 3');
     S.Add('#iptables -t mangle -A OUTPUT -p tcp -m multiport --dport 443 -j MARK --set-mark 3');
-    S.Add('');
+    S.Add(''); }
+
     S.Add('#Создаём таблицу маршрутизации');
     S.Add('ip route add default dev tun2socks table 300');
     S.Add('ip rule add fwmark 3 lookup 300');
 
-{    S.Add('  else');
+    {    S.Add('  else');
     S.Add('#Очищаем таблицу с дефолтным маршрутом');
     S.Add('ip rule del fwmark 3 lookup 300 &> /dev/null');
     S.Add('#Удаляем интерфейс SOCKS5');
@@ -452,6 +466,17 @@ begin
     S.Add('#Секция маскардинга');
     S.Add('iptables -A FORWARD -i $wan -o $lan -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT');
     S.Add('iptables -A FORWARD -i $lan -o $wan -j ACCEPT');
+
+    //Если активен WiFi (AP) и не выбран как LAN или WAN
+    if RunCommand('/bin/bash', ['-c', 'nmcli con show --active | grep wifi | awk ' +
+      '''' + '{print $NF}' + ''''], k) then
+      if (Trim(k) <> '') and (Trim(k) <> LAN.Text) and (Trim(k) <> WAN.Text) then
+      begin
+        S.Add('iptables -A FORWARD -i $wan -o ' + Trim(k) +
+          ' -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT');
+        S.Add('iptables -A FORWARD -i ' + Trim(k) + ' -o $wan -j ACCEPT');
+      end;
+
     S.Add('iptables -t nat -A POSTROUTING -o $wan -j MASQUERADE');
     S.Add('');
     S.Add('#Отключаем шифрование DNS и пересылку в tun2socks, используем надёжные DNS');
