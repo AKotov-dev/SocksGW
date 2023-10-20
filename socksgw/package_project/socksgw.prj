@@ -2,7 +2,7 @@
 name=socksgw
 
 [VERSION]
-version=0.9
+version=1.0
 
 [RELEASE]
 release=0.mrx9
