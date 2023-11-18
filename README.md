@@ -12,7 +12,7 @@ SocksGW - это инструмент, позволяющий превратит
 После загрузки с флешки запустите ярлык на Рабочем Столе `Установить на жесткий диск`. После установки/перезагрузки пароль по умолчанию `ghbdtn` (слово `привет` в английской раскладке).
 
 ## Самостоятельное изготовление
-Вы можете настроить шлюз самостоятельно, с нуля. Для этого установите пакеты [dnscrypt-gui](https://github.com/AKotov-dev/dnscrypt-gui/releases), [xraygui](https://github.com/AKotov-dev/XRayGUI/releases) и [socksgw](https://github.com/AKotov-dev/SocksGW/releases). Обсуждение [здесь](https://linuxforum.ru/viewtopic.php?pid=471777#p471777).
+Вы можете настроить шлюз самостоятельно, с нуля. Для этого установите пакеты [dnscrypt-gui](https://github.com/AKotov-dev/dnscrypt-gui/releases), [xraygui](https://github.com/AKotov-dev/XRayGUI/releases) и [socksgw](https://github.com/AKotov-dev/SocksGW/releases).
 
 **Зависимости:** systemd gtk2 polkit xraygui dnscrypt-gui dnsmasq iptables x11vnc sshd (nm-lite для MATE)  
 **Рабочий каталог:** /etc/socksgw; скрипт построения шлюза: /etc/socksgw/tun2socks.sh  
