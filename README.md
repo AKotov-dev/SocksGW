@@ -5,7 +5,7 @@ SocksGW - это инструмент, позволяющий превратит
   
 Готовая сборка (флешка-шлюз) для установки на будущий роутер [находится здесь](https://drive.google.com/drive/folders/1DVoUumM_CQ10da0Vqtu98uvrMbBk9DmM?usp=sharing) (RU/EN).  
 + `v1.0` - Финальное тестирование; релиз стабилен
-+ `v0.9` + драйверы rtl8188eu и контроль WiFi (AP)
++ `v0.9` + драйверы [rtl8188eus](https://github.com/AKotov-dev/rtl8188eus) и контроль WiFi (AP)
 + `v0.8.3` + XRayGUI: байпас доменных зон (cn, ru, by, ir, ...)
 + `v0.8.1` + XRayGUI: простой генератор конфигураций `XTLS-Reality` Клиент-Сервер
   
