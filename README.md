@@ -52,12 +52,11 @@ LAN->Остальное->IPTABLES+ROUTE->Tun2Socks+Xray->WAN
 #### Примечание
 1. Если мини-пк имеет только один ethernet-порт, в настройках SocksGW указываем LAN=WAN. В этом случае мини-пк будет обслуживать LAN через Wi-Fi, т.е. являться точкой доступа (AP) для ваших ПК, смартфонов и т.д.
 2. Длина пароля при настройке точки доступа (Wi-Fi AP) должна быть не менее 8 символов
-3. Рабочий каталог SocksGW: `/etc/socksgw`; Основной скрипт: `/etc/socksgw/tun2socks.sh`
-4. Сервисы запуска SocksGW:
+3. Сервисы запуска SocksGW:
     + /etc/systemd/system/tun2socks.service - запуск основного скрипта
     + /etc/systemd/system/tun2socks-update.service - обновление tun2socks
     + /etc/systemd/system/x11vnc.service - удаленный доступ по VNC
-5. При старте `XRayGUI` и `SocksGW` запускается проверка обновлений `xray-core` и `tun2socks` соответственно; обновляйтесь.
+4. При старте `XRayGUI` и `SocksGW` запускается проверка обновлений `xray-core` и `tun2socks` соответственно; обновляйтесь.
 
 
 Всем безопасного вэб-серфинга, друзья.
